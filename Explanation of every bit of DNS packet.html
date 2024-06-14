@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>DNS Packet: Every Byte Explained</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="title" content="The Illustrated TLS 1.2 Connection">
     <meta name="description" content="Every byte of a TLS connection explained and reproduced">
-    <link rel="stylesheet" href="The%20Illustrated%20TLS%20Connection%20Every%20Byte%20Explained_files/frombootstrap.css">
-    <link rel="stylesheet" href="The%20Illustrated%20TLS%20Connection%20Every%20Byte%20Explained_files/illustrated.css">
-    <script src="The%20Illustrated%20TLS%20Connection%20Every%20Byte%20Explained_files/illustrated.js"></script>
+    <link rel="stylesheet" href="include/frombootstrap.css">
+    <link rel="stylesheet" href="include/illustrated.css">
+    <script src="include/illustrated.js"></script>
 
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://tls12.xargs.org/">
@@ -39,449 +41,559 @@
 </head>
 
 <body class="illustrated">
-<div class="header">
-    <a href="https://quic.xargs.org/">QUIC</a>
-    <a href="https://dtls.xargs.org/">DTLS</a>
-    <a href="https://tls13.xargs.org/">TLS 1.3</a>
-    <a class="this-page" href="https://tls12.xargs.org/">TLS 1.2</a>
-</div>
-<div class="container">
-    <h1>The Illustrated DNS Packets</h1>
-
-    <h3>Every byte explained and reproduced</h3>
-
-    <div class="outerblock">
-    <p>A detailed bit by bit explaination of various types of dns packets</p>
+    <div class="header">
+        <a href="https://quic.xargs.org/">QUIC</a>
+        <a href="https://dtls.xargs.org/">DTLS</a>
+        <a href="https://tls13.xargs.org/">TLS 1.3</a>
+        <a class="this-page" href="https://tls12.xargs.org/">TLS 1.2</a>
     </div>
+    <div class="container">
+        <h1>The Illustrated DNS Packets</h1>
 
-<div class="open-close-all rec-outer">
-    <button id="openCloseAll" class="annotate-toggle" data-lbl-state="open" data-lbl-toggle="Close All" onclick="ill.openCloseAll(this, event)">Open All</button>
-</div>
+        <h3>Every byte explained and reproduced</h3>
 
-<div class="rec-outer">
-<div class="record client" data-anchor="client-hello"><a class="no-show" href="#client-hello"></a><a class="no-show" href="#client-hello/annotated"></a>
-<div class="rec-label">Header</div>
-<img class="illustration" src="The%20Illustrated%20TLS%20Connection%20Every%20Byte%20Explained_files/key1.png" width="135" height="250">
-<div class="rec-explanation">
-    The session begins with the client saying "Hello".
-    The client provides the following:
-    <ul>
-    Where each of these fields is as described below:
-<li><b>ID</b> A 16 bit identifier assigned by the program that generates any kind of query. This identifier
-is copied the corresponding reply and can be used by the requester to match up replies to
-outstanding queries. You should select a new, random 16 bit number for each request.
-</li></ul>
-	
-
-
-</div><button id="annotateTmpl" class="annotate-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
-<span class="record-data">
-    <span class="string">
-        <span class="label">Transaction ID</span>
-        <span class="bytes">
- 5e 6e
-        </span>
-        <div class="explanation"><h4></h4>
-             A 16 bit identifier assigned by the program that
-                generates any kind of query.  This identifier is copied
-                the corresponding reply and can be used by the requester
-                to match up replies to outstanding querie
-            
+        <div class="outerblock">
+            <p>A detailed bit by bit explaination of various types of dns packets</p>
         </div>
-    </span>
 
-    <span class="string">
-        <span class="label">Flags</span>
-        <span class="bytes">
- 01 00
-        </span>
-        <div class="explanation"><h4></h4>
-
-            <ul>
-				<li><tt>0... .... .... ....</tt>= QR</li>
-				<li><tt>.000 0... .... ....</tt>= Opcode</li>
-				<li><tt>.... .0.. .... ....</tt>= AA</li>
-
-				<li><tt>.... ..0. .... ....</tt>= TC</li>
-				<li><tt>.... ...1 .... ....</tt>= RD</li>
-				<li><tt>.... .... 0... ....</tt>= RA</li>
-				<li><tt>.... .... .0.. ....</tt>= Z</li>
-				<li><tt>.... .... ..0. ....</tt>= authenticated Answer</li>
-				<li><tt>.... .... ...0 ....</tt>= Non-authenticated data: Unacceptable</li>
-				<li><tt>.... .... .... 0000</tt>= Response Code</li>
-
-            </ul>
-<li><b>QR</b> is a one bit field that specifies whether this message is a query (0), or a response (1).
-
-</li><li><b>OPCODE</b> is a four bit field that specifies kind of query in this message. You should use 0, representing
-a standard query.
-</li><li><b>AA Authoritative Answer</b> - this bit is only meaningful in responses, and specifies that the responding name server is an authority for the domain name in question section. You should use this
-bit to report whether or not the response you receive is authoritative.
-</li><li><b>TC TrunCation</b> - specifies that this message was truncated. For this project, you must exit and return
-an error if you receive a response that is truncated.
-</li><li><b>RD Recursion Desired</b> - this bit directs the name server to pursue the query recursively. You should
-use 1, representing that you desire recursion.
-</li><li><b>RA Recursion Available</b> - this be is set or cleared in a response, and denotes whether recursive
-query support is available in the name server. Recursive query support is optional. You
-must exit and return an error if you receive a response that indicates the server does not support
-recursion.
-</li><li><b>Z</b> Reserved for future use. You must set this field to 0.
-</li>
-<li><b>RCODE Response code</b> - this 4 bit field is set as part of responses. The values have the following
-interpretation:
-</li> <ul>
-<li><b>NOERROR(0) </b>No error condition</li>
-<li><b>FORMERR(1) </b>Format error - The name server was unable to interpret the query.</li>
-<li><b>SERVFAIL(2) </b>Server failure - The name server was unable to process this query due to a problem with
-the name server.</li>
-<li><b>NXDOMAIN(3) </b> - Meaningful only for responses from an authoritative name server, this code
-signifies that the domain name referenced in the query does not exist.</li>
-<li><b>NOTIMP(4) </b>Not Implemented - The name server does not support the requested kind of query.</li>
-<li><b>REFUSED(5) </b> - The name server refuses to perform the specified operation for policy reasons.
-You should set this field to 0, and should assert an error if you receive a response indicating an
-error condition. You should treat 3 differently, as this represents the case where a requested name
-doesn’t exist</li></ul>
-</ul>     
-	 </div>
-    </span>
-
-    
-
-       
-    
-</span>
-</div>
-</div>
-
-<div class="rec-outer">
-<div class="record server" data-anchor="server-hello"><a class="no-show" href="#server-hello"></a><a class="no-show" href="#server-hello/annotated"></a>
-<div class="rec-label">Question</div>
-<img class="illustration" src="The%20Illustrated%20TLS%20Connection%20Every%20Byte%20Explained_files/key2.png" width="124" height="250">
-<div class="rec-explanation">
-    The server says "Hello" back.  The server provides the following:
-    <ul>
-    <li>the selected protocol version
-    </li><li>server random data (used later in the handshake)
-    </li><li>the session id
-    </li><li>the selected cipher suite
-    </li><li>the selected compression method
-    </li><li>a list of extensions
-    </li></ul>
-</div><button id="annotateTmpl" class="annotate-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
-<span class="record-data">
-    <span class="string">
-        <span class="label">Record Header</span>
-        <span class="bytes">
- 16 03 03 00 31
-        </span>
-        <div class="explanation"><h4>Record Header</h4>
-            TLS sessions are broken into the sending
-            and receiving of "records", which are blocks
-            of data with a type, a protocol version,
-            and a length.
-            <ul>
-            <li><tt>16</tt> - type is 0x16 (handshake record)
-            </li><li><tt>03 03</tt> - protocol version is "3,3" (TLS 1.2)
-            </li><li><tt>00 31</tt> - 0x31 (49) bytes of handshake message follows
-            </li></ul>
+        <div class="open-close-all rec-outer">
+            <button id="openCloseAll" class="annotate-toggle" data-lbl-state="open" data-lbl-toggle="Close All"
+                onclick="ill.openCloseAll(this, event)">Open All</button>
         </div>
-    </span>
 
-    <span class="string">
-        <span class="label">Handshake Header</span>
-        <span class="bytes">
- 02 00 00 2d
-        </span>
-        <div class="explanation"><h4>Handshake Header</h4>
-            Each handshake message starts with a type and a length.
-            <ul>
-            <li><tt>02</tt> - handshake message type 0x02 (server hello)
-            </li><li><tt>00 00 2d</tt> - 0x2D (45) bytes of server hello data follows
-            </li></ul>
+        <div class="rec-outer">
+            <div class="record client" data-anchor="client-hello"><a class="no-show" href="#client-hello"></a><a
+                    class="no-show" href="#client-hello/annotated"></a>
+                <div class="rec-label">Header</div>
+                <img class="illustration" src="include/key1.png" width="135" height="250">
+                <div class="rec-explanation">
+                    The session begins with the client saying "Hello".
+                    The client provides the following:
+                    <ul>
+                        Where each of these fields is as described below:
+                        <li><b>ID</b> A 16 bit identifier assigned by the program that generates any kind of query. This
+                            identifier
+                            is copied the corresponding reply and can be used by the requester to match up replies to
+                            outstanding queries. You should select a new, random 16 bit number for each request.
+                        </li>
+                    </ul>
+
+                </div>
+                <button id="annotateTmpl" class="annotate-toggle"
+                    onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
+                <span class="record-data">
+                    <span class="string">
+                        <span class="label">Transaction ID</span>
+                        <span class="bytes">
+                            5e 6e
+                        </span>
+                        <div class="explanation">
+                            <h4></h4>
+                            A 16 bit identifier assigned by the program that
+                            generates any kind of query. This identifier is copied
+                            the corresponding reply and can be used by the requester
+                            to match up replies to outstanding querie
+
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Flags</span>
+                        <span class="bytes">
+                            01 00
+                        </span>
+                        <div class="explanation">
+                            <h4></h4>
+
+                            <ul>
+                                <li><tt>0... .... .... ....</tt>= QR</li>
+                                <li><tt>.000 0... .... ....</tt>= Opcode</li>
+                                <li><tt>.... .0.. .... ....</tt>= AA</li>
+
+                                <li><tt>.... ..0. .... ....</tt>= TC</li>
+                                <li><tt>.... ...1 .... ....</tt>= RD</li>
+                                <li><tt>.... .... 0... ....</tt>= RA</li>
+                                <li><tt>.... .... .0.. ....</tt>= Z</li>
+                                <li><tt>.... .... ..0. ....</tt>= authenticated Answer</li>
+                                <li><tt>.... .... ...0 ....</tt>= Non-authenticated data: Unacceptable</li>
+                                <li><tt>.... .... .... 0000</tt>= Response Code</li>
+
+                            </ul>
+                            <li><b>QR</b> is a one bit field that specifies whether this message is a query (0), or a
+                                response (1).
+
+                            </li>
+                            <li><b>OPCODE</b> is a four bit field that specifies kind of query in this message. You
+                                should use 0, representing
+                                a standard query.
+                            </li>
+                            <li><b>AA Authoritative Answer</b> - this bit is only meaningful in responses, and specifies
+                                that the responding name server is an authority for the domain name in question section.
+                                You should use this
+                                bit to report whether or not the response you receive is authoritative.
+                            </li>
+                            <li><b>TC TrunCation</b> - specifies that this message was truncated. For this project, you
+                                must exit and return
+                                an error if you receive a response that is truncated.
+                            </li>
+                            <li><b>RD Recursion Desired</b> - this bit directs the name server to pursue the query
+                                recursively. You should
+                                use 1, representing that you desire recursion.
+                            </li>
+                            <li><b>RA Recursion Available</b> - this be is set or cleared in a response, and denotes
+                                whether recursive
+                                query support is available in the name server. Recursive query support is optional. You
+                                must exit and return an error if you receive a response that indicates the server does
+                                not support
+                                recursion.
+                            </li>
+                            <li><b>Z</b> Reserved for future use. You must set this field to 0.
+                            </li>
+                            <li><b>RCODE Response code</b> - this 4 bit field is set as part of responses. The values
+                                have the following
+                                interpretation:
+                            </li>
+                            <ul>
+                                <li><b>NOERROR(0) </b>No error condition</li>
+                                <li><b>FORMERR(1) </b>Format error - The name server was unable to interpret the query.
+                                </li>
+                                <li><b>SERVFAIL(2) </b>Server failure - The name server was unable to process this query
+                                    due to a problem with
+                                    the name server.</li>
+                                <li><b>NXDOMAIN(3) </b> - Meaningful only for responses from an authoritative name
+                                    server, this code
+                                    signifies that the domain name referenced in the query does not exist.</li>
+                                <li><b>NOTIMP(4) </b>Not Implemented - The name server does not support the requested
+                                    kind of query.</li>
+                                <li><b>REFUSED(5) </b> - The name server refuses to perform the specified operation for
+                                    policy reasons.
+                                    You should set this field to 0, and should assert an error if you receive a response
+                                    indicating an
+                                    error condition. You should treat 3 differently, as this represents the case where a
+                                    requested name
+                                    doesn’t exist</li>
+                            </ul>
+                            </ul>
+                        </div>
+                    </span>
+
+                </span>
+            </div>
         </div>
-    </span>
 
-    <span class="string">
-        <span class="label">Server Version</span>
-        <span class="bytes">
- 03 03
-        </span>
-        <div class="explanation"><h4>Server Version</h4>
-            The protocol version of "3,3" (TLS 1.2) is given.
-            <br><br>
-            The unusual version number ("3,3" representing
-            TLS 1.2) is due to TLS 1.0 being a minor
-            revision of the SSL 3.0 protocol.  Therefore
-            TLS 1.0 is represented by "3,1", TLS 1.1 is
-            "3,2", and so on.
+        <div class="rec-outer">
+            <div class="record server" data-anchor="server-hello"><a class="no-show" href="#server-hello"></a><a
+                    class="no-show" href="#server-hello/annotated"></a>
+                <div class="rec-label">Question</div>
+                <img class="illustration" src="include/key2.png" width="124" height="250">
+                <div class="rec-explanation">
+                    The server says "Hello" back. The server provides the following:
+                    <ul>
+                        <li>the selected protocol version
+                        </li>
+                        <li>server random data (used later in the handshake)
+                        </li>
+                        <li>the session id
+                        </li>
+                        <li>the selected cipher suite
+                        </li>
+                        <li>the selected compression method
+                        </li>
+                        <li>a list of extensions
+                        </li>
+                    </ul>
+                </div><button id="annotateTmpl" class="annotate-toggle"
+                    onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
+                <span class="record-data">
+                    <span class="string">
+                        <span class="label">Record Header</span>
+                        <span class="bytes">
+                            16 03 03 00 31
+                        </span>
+                        <div class="explanation">
+                            <h4>Record Header</h4>
+                            TLS sessions are broken into the sending
+                            and receiving of "records", which are blocks
+                            of data with a type, a protocol version,
+                            and a length.
+                            <ul>
+                                <li><tt>16</tt> - type is 0x16 (handshake record)
+                                </li>
+                                <li><tt>03 03</tt> - protocol version is "3,3" (TLS 1.2)
+                                </li>
+                                <li><tt>00 31</tt> - 0x31 (49) bytes of handshake message follows
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Handshake Header</span>
+                        <span class="bytes">
+                            02 00 00 2d
+                        </span>
+                        <div class="explanation">
+                            <h4>Handshake Header</h4>
+                            Each handshake message starts with a type and a length.
+                            <ul>
+                                <li><tt>02</tt> - handshake message type 0x02 (server hello)
+                                </li>
+                                <li><tt>00 00 2d</tt> - 0x2D (45) bytes of server hello data follows
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Server Version</span>
+                        <span class="bytes">
+                            03 03
+                        </span>
+                        <div class="explanation">
+                            <h4>Server Version</h4>
+                            The protocol version of "3,3" (TLS 1.2) is given.
+                            <br><br>
+                            The unusual version number ("3,3" representing
+                            TLS 1.2) is due to TLS 1.0 being a minor
+                            revision of the SSL 3.0 protocol. Therefore
+                            TLS 1.0 is represented by "3,1", TLS 1.1 is
+                            "3,2", and so on.
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Server Random</span>
+                        <span class="bytes">
+                            70 71 72 73 74 75 76 77 78 79 7a 7b 7c 7d 7e 7f 80 81 82 83 84 85 86 87 88 89 8a 8b 8c 8d 8e
+                            8f
+                        </span>
+                        <div class="explanation">
+                            <h4>Server Random</h4>
+                            The server provides 32 bytes of random data.
+                            In this example we've made the random data a predictable string.
+                            <br><br>
+                            The TLS 1.2 spec says that the first 4 bytes
+                            should be the current time in seconds-since-1970
+                            but this is
+                            <a href="https://tools.ietf.org/html/draft-mathewson-no-gmtunixtime-00">now recommended
+                                against</a>
+                            as it enables fingerprinting of hosts and servers.
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Session ID</span>
+                        <span class="bytes">
+                            00
+                        </span>
+                        <div class="explanation">
+                            <h4>Session ID</h4>
+                            The server can provide an ID for this session
+                            which a client can provide on a later session
+                            negotiation in an attempt to re-use the key
+                            data and skip most of the TLS negotiation
+                            process. For this to work both the server
+                            and client will store key information from
+                            the previous connection in memory. Resuming
+                            a connection saves a lot of computation and
+                            network round-trip time so it is performed
+                            whenever possible.
+                            <ul>
+                                <li><tt>00</tt> - length of zero (no session id is used)
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Cipher Suite</span>
+                        <span class="bytes">
+                            c0 13
+                        </span>
+                        <div class="explanation">
+                            <h4>Cipher Suite</h4>
+                            The server has selected cipher suite 0xC013
+                            (TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) from the
+                            list of options given by the client.
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Compression Method</span>
+                        <span class="bytes">
+                            00
+                        </span>
+                        <div class="explanation">
+                            <h4>Compression Method</h4>
+                            The server has selected compression method
+                            0x00 ("Null", which performs no compression)
+                            from the list of options given by the client.
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Extensions Length</span>
+                        <span class="bytes">
+                            00 05
+                        </span>
+                        <div class="explanation">
+                            <h4>Extensions Length</h4>
+                            The server has returned a list of extensions
+                            to the client. Because the server is
+                            forbidden from replying with an extension
+                            that the client did not send in its hello
+                            message, the server knows that the client
+                            will support all extensions listed.
+                            <ul>
+                                <li><tt>00 05</tt> - the extensions will take 0x5 (5) bytes of data
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Extension - Renegotiation Info</span>
+                        <span class="bytes">
+                            ff 01 00 01 00
+                        </span>
+                        <div class="explanation">
+                            <h4>Extension - Renegotiation Info</h4>
+                            The presence of this extension prevents
+                            <a href="https://kryptera.se/Renegotiating%20TLS.pdf">a type of attack</a>
+                            performed with TLS renegotiation.
+                            <br><br>
+                            The ability to renegotiate a connection has been removed from the next version of this
+                            protocol (TLS 1.3) so this extension will no longer be necessary in the future.
+                            <ul>
+                                <li><tt>ff 01</tt> - assigned value for extension "Renegotiation Info"
+                                </li>
+                                <li><tt>00 01</tt> - 0x1 (1) bytes of "Renegotiation Info" extension data follows
+                                </li>
+                                <li><tt>00</tt> - length of renegotiation data is zero, because this is a new connection
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                </span>
+            </div>
         </div>
-    </span>
 
-    <span class="string">
-        <span class="label">Server Random</span>
-        <span class="bytes">
- 70 71 72 73 74 75 76 77 78 79 7a 7b 7c 7d 7e 7f 80 81 82 83 84 85 86 87 88 89 8a 8b 8c 8d 8e 8f
-        </span>
-        <div class="explanation"><h4>Server Random</h4>
-            The server provides 32 bytes of random data.
-            In this example we've made the random data a predictable string.
-            <br><br>
-            The TLS 1.2 spec says that the first 4 bytes
-            should be the current time in seconds-since-1970
-            but this is
-            <a href="https://tools.ietf.org/html/draft-mathewson-no-gmtunixtime-00">now recommended against</a>
-            as it enables fingerprinting of hosts and servers.
-        </div>
-    </span>
+        <div class="rec-outer">
+            <div class="record server" data-anchor="server-certificate"><a class="no-show"
+                    href="#server-certificate"></a><a class="no-show" href="#server-certificate/annotated"></a>
+                <div class="rec-label">Answer</div>
+                <img class="illustration" src="include/key3.png" width="130" height="250">
+                <div class="rec-explanation">
+                    The server provides a certificate containing the following:
+                    <ul>
+                        <li>the hostname of the server
+                        </li>
+                        <li>the public key used by this server
+                        </li>
+                        <li>proof from a trusted third party that the owner of this hostname holds the private key for
+                            this public key
+                        </li>
+                    </ul>
+                    <a href="https://tls12.xargs.org/certificate.html" target="_blank">Explore the server
+                        certificate</a>.
+                </div><button id="annotateTmpl" class="annotate-toggle"
+                    onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
+                <span class="record-data">
+                    <span class="string">
+                        <span class="label">Record Header</span>
+                        <span class="bytes">
+                            16 03 03 03 2f
+                        </span>
+                        <div class="explanation">
+                            <h4>Record Header</h4>
+                            TLS sessions are broken into the sending
+                            and receiving of "records", which are blocks
+                            of data with a type, a protocol version,
+                            and a length.
+                            <ul>
+                                <li><tt>16</tt> - type is 0x16 (handshake record)
+                                </li>
+                                <li><tt>03 03</tt> - protocol version is "3,3" (TLS 1.2)
+                                </li>
+                                <li><tt>03 2f</tt> - 0x32F (815) bytes of handshake message follows
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
 
-    <span class="string">
-        <span class="label">Session ID</span>
-        <span class="bytes">
- 00
-        </span>
-        <div class="explanation"><h4>Session ID</h4>
-            The server can provide an ID for this session
-            which a client can provide on a later session
-            negotiation in an attempt to re-use the key
-            data and skip most of the TLS negotiation
-            process.  For this to work both the server
-            and client will store key information from
-            the previous connection in memory.  Resuming
-            a connection saves a lot of computation and
-            network round-trip time so it is performed
-            whenever possible.
-            <ul>
-            <li><tt>00</tt> - length of zero (no session id is used)
-            </li></ul>
-        </div>
-    </span>
+                    <span class="string">
+                        <span class="label">Handshake Header</span>
+                        <span class="bytes">
+                            0b 00 03 2b
+                        </span>
+                        <div class="explanation">
+                            <h4>Handshake Header</h4>
+                            Each handshake message starts with a type and a length.
+                            <ul>
+                                <li><tt>0b</tt> - handshake message type 0x0B (certificate)
+                                </li>
+                                <li><tt>00 03 2b</tt> - 0x32B (811) of certificate message follows
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
 
-    <span class="string">
-        <span class="label">Cipher Suite</span>
-        <span class="bytes">
- c0 13
-        </span>
-        <div class="explanation"><h4>Cipher Suite</h4>
-            The server has selected cipher suite 0xC013
-            (TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) from the
-            list of options given by the client.
-        </div>
-    </span>
+                    <span class="string">
+                        <span class="label">Certificates Length</span>
+                        <span class="bytes">
+                            00 03 28
+                        </span>
+                        <div class="explanation">
+                            <h4>Certificates Length</h4>
+                            The certificate message begins with the
+                            length of all certificate data that will follow.
+                            <ul>
+                                <li><tt>00 03 28</tt> - 0x328 (808) bytes of certificate list follows
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
 
-    <span class="string">
-        <span class="label">Compression Method</span>
-        <span class="bytes">
- 00
-        </span>
-        <div class="explanation"><h4>Compression Method</h4>
-            The server has selected compression method
-            0x00 ("Null", which performs no compression)
-            from the list of options given by the client.
-        </div>
-    </span>
+                    <span class="string">
+                        <span class="label">Certificate Length</span>
+                        <span class="bytes">
+                            00 03 25
+                        </span>
+                        <div class="explanation">
+                            <h4>Certificate Length</h4>
+                            The length of the first (and only) certificate.
+                            <ul>
+                                <li><tt>00 03 25</tt> - 0x325 (805) bytes of certificate follows
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
 
-    <span class="string">
-        <span class="label">Extensions Length</span>
-        <span class="bytes">
- 00 05
-        </span>
-        <div class="explanation"><h4>Extensions Length</h4>
-            The server has returned a list of extensions
-            to the client.  Because the server is
-            forbidden from replying with an extension
-            that the client did not send in its hello
-            message, the server knows that the client
-            will support all extensions listed.
-            <ul>
-            <li><tt>00 05</tt> - the extensions will take 0x5 (5) bytes of data
-            </li></ul>
-        </div>
-    </span>
+                    <span class="string">
+                        <span class="label">Certificate</span>
+                        <span class="bytes">
+                            30 82 03 21 30 82 02 09 a0 03 02 01 02 02 08 15 5a 92 ad c2 04 8f 90 30 0d 06 09 2a 86 48 86
+                            f7
+                            0d 01 01 0b 05 00 30 22 31 0b 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0a 13
+                            0a
+                            45 78 61 6d 70 6c 65 20 43 41 30 1e 17 0d 31 38 31 30 30 35 30 31 33 38 31 37 5a 17 0d 31 39
+                            31
+                            30 30 35 30 31 33 38 31 37 5a 30 2b 31 0b 30 09 06 03 55 04 06 13 02 55 53 31 1c 30 1a 06 03
+                            55
+                            04 03 13 13 65 78 61 6d 70 6c 65 2e 75 6c 66 68 65 69 6d 2e 6e 65 74 30 82 01 22 30 0d 06 09
+                            2a
+                            86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 c4 80 36 06 ba e7 47
+                            6b
+                            08 94 04 ec a7 b6 91 04 3f f7 92 bc 19 ee fb 7d 74 d7 a8 0d 00 1e 7b 4b 3a 4a e6 0f e8 c0 71
+                            fc
+                            73 e7 02 4c 0d bc f4 bd d1 1d 39 6b ba 70 46 4a 13 e9 4a f8 3d f3 e1 09 59 54 7b c9 55 fb 41
+                            2d
+                            a3 76 52 11 e1 f3 dc 77 6c aa 53 37 6e ca 3a ec be c3 aa b7 3b 31 d5 6c b6 52 9c 80 98 bc c9
+                            e0
+                            28 18 e2 0b f7 f8 a0 3a fd 17 04 50 9e ce 79 bd 9f 39 f1 ea 69 ec 47 97 2e 83 0f b5 ca 95 de
+                            95
+                            a1 e6 04 22 d5 ee be 52 79 54 a1 e7 bf 8a 86 f6 46 6d 0d 9f 16 95 1a 4c f7 a0 46 92 59 5c 13
+                            52
+                            f2 54 9e 5a fb 4e bf d7 7a 37 95 01 44 e4 c0 26 87 4c 65 3e 40 7d 7d 23 07 44 01 f4 84 ff d0
+                            8f
+                            7a 1f a0 52 10 d1 f4 f0 d5 ce 79 70 29 32 e2 ca be 70 1f df ad 6b 4b b7 11 01 f4 4b ad 66 6a
+                            11
+                            13 0f e2 ee 82 9e 4d 02 9d c9 1c dd 67 16 db b9 06 18 86 ed c1 ba 94 21 02 03 01 00 01 a3 52
+                            30
+                            50 30 0e 06 03 55 1d 0f 01 01 ff 04 04 03 02 05 a0 30 1d 06 03 55 1d 25 04 16 30 14 06 08 2b
+                            06
+                            01 05 05 07 03 02 06 08 2b 06 01 05 05 07 03 01 30 1f 06 03 55 1d 23 04 18 30 16 80 14 89 4f
+                            de
+                            5b cc 69 e2 52 cf 3e a3 00 df b1 97 b8 1d e1 c1 46 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05
+                            00
+                            03 82 01 01 00 59 16 45 a6 9a 2e 37 79 e4 f6 dd 27 1a ba 1c 0b fd 6c d7 55 99 b5 e7 c3 6e 53
+                            3e
+                            ff 36 59 08 43 24 c9 e7 a5 04 07 9d 39 e0 d4 29 87 ff e3 eb dd 09 c1 cf 1d 91 44 55 87 0b 57
+                            1d
+                            d1 9b df 1d 24 f8 bb 9a 11 fe 80 fd 59 2b a0 39 8c de 11 e2 65 1e 61 8c e5 98 fa 96 e5 37 2e
+                            ef
+                            3d 24 8a fd e1 74 63 eb bf ab b8 e4 d1 ab 50 2a 54 ec 00 64 e9 2f 78 19 66 0d 3f 27 cf 20 9e
+                            66
+                            7f ce 5a e2 e4 ac 99 c7 c9 38 18 f8 b2 51 07 22 df ed 97 f3 2e 3e 93 49 d4 c6 6c 9e a6 39 6d
+                            74
+                            44 62 a0 6b 42 c6 d5 ba 68 8e ac 3a 01 7b dd fc 8e 2c fc ad 27 cb 69 d3 cc dc a2 80 41 44 65
+                            d3
+                            ae 34 8c e0 f3 4a b2 fb 9c 61 83 71 31 2b 19 10 41 64 1c 23 7f 11 a5 d6 5c 84 4f 04 04 84 99
+                            38
+                            71 2b 95 9e d6 85 bc 5c 5d d6 45 ed 19 90 94 73 40 29 26 dc b4 0e 34 69 a1 59 41 e8 e2 cc a8
+                            4b
+                            b6 08 46 36 a0
+                        </span>
+                        <div class="explanation">
+                            <h4>Certificate</h4>
+                            The certificate is in ASN.1 DER
+                            encoding. The details of this format and
+                            the content of this binary payload are
+                            documented <a href="https://tls12.xargs.org/certificate.html" target="_blank">on another
+                                page</a>.
+                            <a href="https://tls12.xargs.org/files/server.crt" download="server.crt">The certificate</a>
+                            can be converted to the binary data in this message
+                            at the command line:
+                            <codesample class="">
+                                <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
 
-    <span class="string">
-        <span class="label">Extension - Renegotiation Info</span>
-        <span class="bytes">
- ff 01 00 01 00
-        </span>
-        <div class="explanation"><h4>Extension - Renegotiation Info</h4>
-            The presence of this extension prevents
-            <a href="https://kryptera.se/Renegotiating%20TLS.pdf">a type of attack</a>
-            performed with TLS renegotiation.
-            <br><br>
-            The ability to renegotiate a connection has been removed from the next version of this
-            protocol (TLS 1.3) so this extension will no longer be necessary in the future.
-            <ul>
-                <li><tt>ff 01</tt> - assigned value for extension "Renegotiation Info"
-                </li><li><tt>00 01</tt> - 0x1 (1) bytes of "Renegotiation Info" extension data follows
-                </li><li><tt>00</tt> - length of renegotiation data is zero, because this is a new connection
-            </li></ul>
-        </div>
-    </span>
-</span>
-</div>
-</div>
-
-<div class="rec-outer">
-<div class="record server" data-anchor="server-certificate"><a class="no-show" href="#server-certificate"></a><a class="no-show" href="#server-certificate/annotated"></a>
-<div class="rec-label">Answer</div>
-<img class="illustration" src="The%20Illustrated%20TLS%20Connection%20Every%20Byte%20Explained_files/key3.png" width="130" height="250">
-<div class="rec-explanation">
-    The server provides a certificate containing the following:
-    <ul>
-    <li>the hostname of the server
-    </li><li>the public key used by this server
-    </li><li>proof from a trusted third party that the owner of this hostname holds the private key for this public key
-    </li></ul>
-    <a href="https://tls12.xargs.org/certificate.html" target="_blank">Explore the server certificate</a>.
-</div><button id="annotateTmpl" class="annotate-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
-<span class="record-data">
-    <span class="string">
-        <span class="label">Record Header</span>
-        <span class="bytes">
- 16 03 03 03 2f
-        </span>
-        <div class="explanation"><h4>Record Header</h4>
-            TLS sessions are broken into the sending
-            and receiving of "records", which are blocks
-            of data with a type, a protocol version,
-            and a length.
-            <ul>
-            <li><tt>16</tt> - type is 0x16 (handshake record)
-            </li><li><tt>03 03</tt> - protocol version is "3,3" (TLS 1.2)
-            </li><li><tt>03 2f</tt> - 0x32F (815) bytes of handshake message follows
-            </li></ul>
-        </div>
-    </span>
-
-    <span class="string">
-        <span class="label">Handshake Header</span>
-        <span class="bytes">
- 0b 00 03 2b
-        </span>
-        <div class="explanation"><h4>Handshake Header</h4>
-            Each handshake message starts with a type and a length.
-            <ul>
-            <li><tt>0b</tt> - handshake message type 0x0B (certificate)
-            </li><li><tt>00 03 2b</tt> - 0x32B (811) of certificate message follows
-            </li></ul>
-        </div>
-    </span>
-
-    <span class="string">
-        <span class="label">Certificates Length</span>
-        <span class="bytes">
- 00 03 28
-        </span>
-        <div class="explanation"><h4>Certificates Length</h4>
-            The certificate message begins with the
-            length of all certificate data that will follow.
-            <ul>
-            <li><tt>00 03 28</tt> - 0x328 (808) bytes of certificate list follows
-            </li></ul>
-        </div>
-    </span>
-
-    <span class="string">
-        <span class="label">Certificate Length</span>
-        <span class="bytes">
- 00 03 25
-        </span>
-        <div class="explanation"><h4>Certificate Length</h4>
-            The length of the first (and only) certificate.
-            <ul>
-            <li><tt>00 03 25</tt> - 0x325 (805) bytes of certificate follows
-            </li></ul>
-        </div>
-    </span>
-
-    <span class="string">
-        <span class="label">Certificate</span>
-        <span class="bytes">
- 30 82 03 21 30 82 02 09 a0 03 02 01 02 02 08 15 5a 92 ad c2 04 8f 90 30 0d 06 09 2a 86 48 86 f7
- 0d 01 01 0b 05 00 30 22 31 0b 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0a 13 0a
- 45 78 61 6d 70 6c 65 20 43 41 30 1e 17 0d 31 38 31 30 30 35 30 31 33 38 31 37 5a 17 0d 31 39 31
- 30 30 35 30 31 33 38 31 37 5a 30 2b 31 0b 30 09 06 03 55 04 06 13 02 55 53 31 1c 30 1a 06 03 55
- 04 03 13 13 65 78 61 6d 70 6c 65 2e 75 6c 66 68 65 69 6d 2e 6e 65 74 30 82 01 22 30 0d 06 09 2a
- 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 c4 80 36 06 ba e7 47 6b
- 08 94 04 ec a7 b6 91 04 3f f7 92 bc 19 ee fb 7d 74 d7 a8 0d 00 1e 7b 4b 3a 4a e6 0f e8 c0 71 fc
- 73 e7 02 4c 0d bc f4 bd d1 1d 39 6b ba 70 46 4a 13 e9 4a f8 3d f3 e1 09 59 54 7b c9 55 fb 41 2d
- a3 76 52 11 e1 f3 dc 77 6c aa 53 37 6e ca 3a ec be c3 aa b7 3b 31 d5 6c b6 52 9c 80 98 bc c9 e0
- 28 18 e2 0b f7 f8 a0 3a fd 17 04 50 9e ce 79 bd 9f 39 f1 ea 69 ec 47 97 2e 83 0f b5 ca 95 de 95
- a1 e6 04 22 d5 ee be 52 79 54 a1 e7 bf 8a 86 f6 46 6d 0d 9f 16 95 1a 4c f7 a0 46 92 59 5c 13 52
- f2 54 9e 5a fb 4e bf d7 7a 37 95 01 44 e4 c0 26 87 4c 65 3e 40 7d 7d 23 07 44 01 f4 84 ff d0 8f
- 7a 1f a0 52 10 d1 f4 f0 d5 ce 79 70 29 32 e2 ca be 70 1f df ad 6b 4b b7 11 01 f4 4b ad 66 6a 11
- 13 0f e2 ee 82 9e 4d 02 9d c9 1c dd 67 16 db b9 06 18 86 ed c1 ba 94 21 02 03 01 00 01 a3 52 30
- 50 30 0e 06 03 55 1d 0f 01 01 ff 04 04 03 02 05 a0 30 1d 06 03 55 1d 25 04 16 30 14 06 08 2b 06
- 01 05 05 07 03 02 06 08 2b 06 01 05 05 07 03 01 30 1f 06 03 55 1d 23 04 18 30 16 80 14 89 4f de
- 5b cc 69 e2 52 cf 3e a3 00 df b1 97 b8 1d e1 c1 46 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00
- 03 82 01 01 00 59 16 45 a6 9a 2e 37 79 e4 f6 dd 27 1a ba 1c 0b fd 6c d7 55 99 b5 e7 c3 6e 53 3e
- ff 36 59 08 43 24 c9 e7 a5 04 07 9d 39 e0 d4 29 87 ff e3 eb dd 09 c1 cf 1d 91 44 55 87 0b 57 1d
- d1 9b df 1d 24 f8 bb 9a 11 fe 80 fd 59 2b a0 39 8c de 11 e2 65 1e 61 8c e5 98 fa 96 e5 37 2e ef
- 3d 24 8a fd e1 74 63 eb bf ab b8 e4 d1 ab 50 2a 54 ec 00 64 e9 2f 78 19 66 0d 3f 27 cf 20 9e 66
- 7f ce 5a e2 e4 ac 99 c7 c9 38 18 f8 b2 51 07 22 df ed 97 f3 2e 3e 93 49 d4 c6 6c 9e a6 39 6d 74
- 44 62 a0 6b 42 c6 d5 ba 68 8e ac 3a 01 7b dd fc 8e 2c fc ad 27 cb 69 d3 cc dc a2 80 41 44 65 d3
- ae 34 8c e0 f3 4a b2 fb 9c 61 83 71 31 2b 19 10 41 64 1c 23 7f 11 a5 d6 5c 84 4f 04 04 84 99 38
- 71 2b 95 9e d6 85 bc 5c 5d d6 45 ed 19 90 94 73 40 29 26 dc b4 0e 34 69 a1 59 41 e8 e2 cc a8 4b
- b6 08 46 36 a0
-        </span>
-        <div class="explanation"><h4>Certificate</h4>
-            The certificate is in ASN.1 DER
-            encoding.  The details of this format and
-            the content of this binary payload are
-            documented <a href="https://tls12.xargs.org/certificate.html" target="_blank">on another page</a>.
-            <a href="https://tls12.xargs.org/files/server.crt" download="server.crt">The certificate</a>
-            can be converted to the binary data in this message
-            at the command line:
-            <codesample class="">
-        <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
-    
-<pre><code>$ openssl x509 -outform der &lt; server.crt | hexdump
+                                <pre><code>$ openssl x509 -outform der &lt; server.crt | hexdump
 
 0000000 30 82 03 21 30 82 02 09 a0 03 02 01 02 02 08 15
 0000010 5a 92 ad c2 04 8f 90 30 0d 06 09 2a 86 48 86 f7
 ... snip ...
 </code></pre>
-            </codesample>
+                            </codesample>
+                        </div>
+                    </span>
+                </span>
+            </div>
         </div>
-    </span>
-</span>
-</div>
-</div>
 
-<div class="rec-outer">
-<div class="calculation server" data-anchor="server-key-exchange-generation"><a class="no-show" href="#server-key-exchange-generation"></a><a class="no-show" href="#server-key-exchange-generation/annotated"></a>
-<div class="rec-label">Authority</div>
-<img class="illustration" src="The%20Illustrated%20TLS%20Connection%20Every%20Byte%20Explained_files/key4.png" width="106" height="250">
-<div class="rec-explanation">
-    <p>The server calculates a private/public keypair
-    for key exchange.  Key exchange is a technique
-    where two parties can agree on the same number without
-    an eavesdropper being able to tell what it is.
-    </p><p>
-    An explanation of the key exchange can be found on my
-    <a href="https://x25519.xargs.org/">X25519 site</a>,
-    but doesn't need to be understood in depth for the rest
-    of this page.
-    </p><p>
-    The private key is chosen by selecting an integer between
-    0 and 2<sup>256</sup>-1.  The server does this by generating 32
-    bytes (256 bits) of random data.  The
-    <a href="https://tls12.xargs.org/files/server-ephemeral-private.key" download="server-ephemeral-private.key">private key</a>
-    selected is:
+        <div class="rec-outer">
+            <div class="calculation server" data-anchor="server-key-exchange-generation"><a class="no-show"
+                    href="#server-key-exchange-generation"></a><a class="no-show"
+                    href="#server-key-exchange-generation/annotated"></a>
+                <div class="rec-label">Authority</div>
+                <img class="illustration" src="include/key4.png" width="106" height="250">
+                <div class="rec-explanation">
+                    <p>The server calculates a private/public keypair
+                        for key exchange. Key exchange is a technique
+                        where two parties can agree on the same number without
+                        an eavesdropper being able to tell what it is.
+                    </p>
+                    <p>
+                        An explanation of the key exchange can be found on my
+                        <a href="https://x25519.xargs.org/">X25519 site</a>,
+                        but doesn't need to be understood in depth for the rest
+                        of this page.
+                    </p>
+                    <p>
+                        The private key is chosen by selecting an integer between
+                        0 and 2<sup>256</sup>-1. The server does this by generating 32
+                        bytes (256 bits) of random data. The
+                        <a href="https://tls12.xargs.org/files/server-ephemeral-private.key"
+                            download="server-ephemeral-private.key">private key</a>
+                        selected is:
 
-    </p><pre class="ind2"><tt class="longboi">909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeaf</tt></pre>
+                    </p>
+                    <pre
+                        class="ind2"><tt class="longboi">909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeaf</tt></pre>
 
-    The <a href="https://tls12.xargs.org/files/server-ephemeral-public.key" download="server-ephemeral-public.key">public key</a>
-    is created from the private key as explained on the <a href="https://x25519.xargs.org/">X25519 site</a>.
-    The public key calculated is:
+                    The <a href="https://tls12.xargs.org/files/server-ephemeral-public.key"
+                        download="server-ephemeral-public.key">public key</a>
+                    is created from the private key as explained on the <a href="https://x25519.xargs.org/">X25519
+                        site</a>.
+                    The public key calculated is:
 
-    <pre class="ind2"><tt class="longboi">9fd7ad6dcff4298dd3f96d5b1b2af910a0535b1488d7f8fabb349a982880b615</tt></pre>
+                    <pre
+                        class="ind2"><tt class="longboi">9fd7ad6dcff4298dd3f96d5b1b2af910a0535b1488d7f8fabb349a982880b615</tt></pre>
 
-    The public key calculation can be confirmed at the command line:
-    <codesample class="">
-        <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
-    
-<pre><code>### requires openssl 1.1.0 or higher
+                    The public key calculation can be confirmed at the command line:
+                    <codesample class="">
+                        <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
+
+                        <pre><code>### requires openssl 1.1.0 or higher
 $ openssl pkey -noout -text &lt; server-ephemeral-private.key
 
 X25519 Private-Key:
@@ -494,128 +606,158 @@ pub:
     10:a0:53:5b:14:88:d7:f8:fa:bb:34:9a:98:28:80:
     b6:15
 </code></pre>
-    </codesample>
-</div>
-</div>
-</div>
-
-<div class="rec-outer">
-<div class="record server" data-anchor="server-key-exchange"><a class="no-show" href="#server-key-exchange"></a><a class="no-show" href="#server-key-exchange/annotated"></a>
-<div class="rec-label">Additional</div>
-<img class="illustration" src="The%20Illustrated%20TLS%20Connection%20Every%20Byte%20Explained_files/key5.png" width="138" height="250">
-<div class="rec-explanation">
-    The server provides information for key exchange.  As part of the
-    key exchange process both the server and the client will have a
-    keypair of public and private keys, and will send the other party
-    their public key.  The shared encryption key will then be generated
-    using a combination of each party's private key and the other party's
-    public key.
-    <br><br>
-    The parties have agreed on a cipher suite using ECDHE, meaning the
-    keypairs will be based on a selected <b>E</b>lliptic <b>C</b>urve,
-    <b>D</b>iffie-<b>H</b>ellman will be used, and the keypairs are
-    <b>E</b>phemeral (generated for each connection) rather
-    than using the public/private key from the certificate.
-</div><button id="annotateTmpl" class="annotate-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
-<span class="record-data">
-    <span class="string">
-        <span class="label">Record Header</span>
-        <span class="bytes">
- 16 03 03 01 2c
-        </span>
-        <div class="explanation"><h4>Record Header</h4>
-            TLS sessions are broken into the sending
-            and receiving of "records", which are blocks
-            of data with a type, a protocol version,
-            and a length.
-            <ul>
-            <li><tt>16</tt> - type is 0x16 (handshake record)
-            </li><li><tt>03 03</tt> - protocol version is "3,3" (TLS 1.2)
-            </li><li><tt>01 2c</tt> - 0x12C (300) bytes of handshake message follows
-            </li></ul>
+                    </codesample>
+                </div>
+            </div>
         </div>
-    </span>
 
-    <span class="string">
-        <span class="label">Handshake Header</span>
-        <span class="bytes">
- 0c 00 01 28
-        </span>
-        <div class="explanation"><h4>Handshake Header</h4>
-            Each handshake message starts with a type and a length.
-            <ul>
-            <li><tt>0c</tt> - handshake message type 0x0c (server key exchange)
-            </li><li><tt>00 01 28</tt> - 0x128 (296) bytes of server key exchange follows
-            </li></ul>
-        </div>
-    </span>
+        <div class="rec-outer">
+            <div class="record server" data-anchor="server-key-exchange"><a class="no-show"
+                    href="#server-key-exchange"></a><a class="no-show" href="#server-key-exchange/annotated"></a>
+                <div class="rec-label">Additional</div>
+                <img class="illustration" src="include/key5.png" width="138" height="250">
+                <div class="rec-explanation">
+                    The server provides information for key exchange. As part of the
+                    key exchange process both the server and the client will have a
+                    keypair of public and private keys, and will send the other party
+                    their public key. The shared encryption key will then be generated
+                    using a combination of each party's private key and the other party's
+                    public key.
+                    <br><br>
+                    The parties have agreed on a cipher suite using ECDHE, meaning the
+                    keypairs will be based on a selected <b>E</b>lliptic <b>C</b>urve,
+                    <b>D</b>iffie-<b>H</b>ellman will be used, and the keypairs are
+                    <b>E</b>phemeral (generated for each connection) rather
+                    than using the public/private key from the certificate.
+                </div><button id="annotateTmpl" class="annotate-toggle"
+                    onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
+                <span class="record-data">
+                    <span class="string">
+                        <span class="label">Record Header</span>
+                        <span class="bytes">
+                            16 03 03 01 2c
+                        </span>
+                        <div class="explanation">
+                            <h4>Record Header</h4>
+                            TLS sessions are broken into the sending
+                            and receiving of "records", which are blocks
+                            of data with a type, a protocol version,
+                            and a length.
+                            <ul>
+                                <li><tt>16</tt> - type is 0x16 (handshake record)
+                                </li>
+                                <li><tt>03 03</tt> - protocol version is "3,3" (TLS 1.2)
+                                </li>
+                                <li><tt>01 2c</tt> - 0x12C (300) bytes of handshake message follows
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
 
-    <span class="string">
-        <span class="label">Curve Info</span>
-        <span class="bytes">
- 03 00 1d
-        </span>
-        <div class="explanation"><h4>Curve Info</h4>
-            The server chooses the elliptic curve that points will be calculated from.
-            <ul>
-            <li><tt>03</tt> - assigned value for "named_curve": the following bytes will identify a specific curve
-            </li><li><tt>00 1d</tt> - curve 0x001d ("curve x25519")
-            </li></ul>
-        </div>
-    </span>
+                    <span class="string">
+                        <span class="label">Handshake Header</span>
+                        <span class="bytes">
+                            0c 00 01 28
+                        </span>
+                        <div class="explanation">
+                            <h4>Handshake Header</h4>
+                            Each handshake message starts with a type and a length.
+                            <ul>
+                                <li><tt>0c</tt> - handshake message type 0x0c (server key exchange)
+                                </li>
+                                <li><tt>00 01 28</tt> - 0x128 (296) bytes of server key exchange follows
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
 
-    <span class="string">
-        <span class="label">Public Key</span>
-        <span class="bytes">
- 20 9f d7 ad 6d cf f4 29 8d d3 f9 6d 5b 1b 2a f9 10 a0 53 5b 14 88 d7 f8 fa bb 34 9a 98 28 80 b6
- 15
-        </span>
-        <div class="explanation"><h4>Public Key</h4>
-            The server provides its public key from the step "Server Key Exchange Generation".
-            <ul>
-            <li><tt>20</tt> - length of 0x20 (32) bytes
-            </li><li><tt>9f d7 ... b6 15</tt> - public key
-            </li></ul>
-        </div>
-    </span>
+                    <span class="string">
+                        <span class="label">Curve Info</span>
+                        <span class="bytes">
+                            03 00 1d
+                        </span>
+                        <div class="explanation">
+                            <h4>Curve Info</h4>
+                            The server chooses the elliptic curve that points will be calculated from.
+                            <ul>
+                                <li><tt>03</tt> - assigned value for "named_curve": the following bytes will identify a
+                                    specific curve
+                                </li>
+                                <li><tt>00 1d</tt> - curve 0x001d ("curve x25519")
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
 
-    <span class="string">
-        <span class="label">Signature</span>
-        <span class="bytes">
- 04 01 01 00 04 02 b6 61 f7 c1 91 ee 59 be 45 37 66 39 bd c3 d4 bb 81 e1 15 ca 73 c8 34 8b 52 5b
- 0d 23 38 aa 14 46 67 ed 94 31 02 14 12 cd 9b 84 4c ba 29 93 4a aa cc e8 73 41 4e c1 1c b0 2e 27
- 2d 0a d8 1f 76 7d 33 07 67 21 f1 3b f3 60 20 cf 0b 1f d0 ec b0 78 de 11 28 be ba 09 49 eb ec e1
- a1 f9 6e 20 9d c3 6e 4f ff d3 6b 67 3a 7d dc 15 97 ad 44 08 e4 85 c4 ad b2 c8 73 84 12 49 37 25
- 23 80 9e 43 12 d0 c7 b3 52 2e f9 83 ca c1 e0 39 35 ff 13 a8 e9 6b a6 81 a6 2e 40 d3 e7 0a 7f f3
- 58 66 d3 d9 99 3f 9e 26 a6 34 c8 1b 4e 71 38 0f cd d6 f4 e8 35 f7 5a 64 09 c7 dc 2c 07 41 0e 6f
- 87 85 8c 7b 94 c0 1c 2e 32 f2 91 76 9e ac ca 71 64 3b 8b 98 a9 63 df 0a 32 9b ea 4e d6 39 7e 8c
- d0 1a 11 0a b3 61 ac 5b ad 1c cd 84 0a 6c 8a 6e aa 00 1a 9d 7d 87 dc 33 18 64 35 71 22 6c 4d d2
- c2 ac 41 fb
-        </span>
-        <div class="explanation"><h4>Signature</h4>
-            Because the server and client have agreed to perform
-            key exchange with ephemeral keys, they are not using
-            the public and private keys associated with the server
-            certificate. To prove that the server owns the
-            certificate (giving the certificate validity in
-            this TLS session), it signs the ephemeral public
-            key with the private key associated with the server's
-            certificate.  This signature can be validated with
-            the public key included in the server's certificate.
-            <ul>
-            <li><tt>04 01</tt> - reserved value for RSA signature with SHA256 hash
-            </li><li><tt>01 00</tt> - length of signature (0x100 or 256 bytes)
-            </li><li><tt>04 02 b6 ... ac 41 fb</tt> - the
-                    computed signature for <tt>SHA256(client_hello_random
-                    + server_hello_random + curve_info + public_key)</tt>
-            </li></ul>
-            We can compute the signature ourselves using
-            the <a href="https://tls12.xargs.org/files/server.key" download="server.key">server's private key</a>,
-            at the command line:
-            <codesample class="">
-        <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
-    
-<pre><code>### client random from Client Hello
+                    <span class="string">
+                        <span class="label">Public Key</span>
+                        <span class="bytes">
+                            20 9f d7 ad 6d cf f4 29 8d d3 f9 6d 5b 1b 2a f9 10 a0 53 5b 14 88 d7 f8 fa bb 34 9a 98 28 80
+                            b6
+                            15
+                        </span>
+                        <div class="explanation">
+                            <h4>Public Key</h4>
+                            The server provides its public key from the step "Server Key Exchange Generation".
+                            <ul>
+                                <li><tt>20</tt> - length of 0x20 (32) bytes
+                                </li>
+                                <li><tt>9f d7 ... b6 15</tt> - public key
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+
+                    <span class="string">
+                        <span class="label">Signature</span>
+                        <span class="bytes">
+                            04 01 01 00 04 02 b6 61 f7 c1 91 ee 59 be 45 37 66 39 bd c3 d4 bb 81 e1 15 ca 73 c8 34 8b 52
+                            5b
+                            0d 23 38 aa 14 46 67 ed 94 31 02 14 12 cd 9b 84 4c ba 29 93 4a aa cc e8 73 41 4e c1 1c b0 2e
+                            27
+                            2d 0a d8 1f 76 7d 33 07 67 21 f1 3b f3 60 20 cf 0b 1f d0 ec b0 78 de 11 28 be ba 09 49 eb ec
+                            e1
+                            a1 f9 6e 20 9d c3 6e 4f ff d3 6b 67 3a 7d dc 15 97 ad 44 08 e4 85 c4 ad b2 c8 73 84 12 49 37
+                            25
+                            23 80 9e 43 12 d0 c7 b3 52 2e f9 83 ca c1 e0 39 35 ff 13 a8 e9 6b a6 81 a6 2e 40 d3 e7 0a 7f
+                            f3
+                            58 66 d3 d9 99 3f 9e 26 a6 34 c8 1b 4e 71 38 0f cd d6 f4 e8 35 f7 5a 64 09 c7 dc 2c 07 41 0e
+                            6f
+                            87 85 8c 7b 94 c0 1c 2e 32 f2 91 76 9e ac ca 71 64 3b 8b 98 a9 63 df 0a 32 9b ea 4e d6 39 7e
+                            8c
+                            d0 1a 11 0a b3 61 ac 5b ad 1c cd 84 0a 6c 8a 6e aa 00 1a 9d 7d 87 dc 33 18 64 35 71 22 6c 4d
+                            d2
+                            c2 ac 41 fb
+                        </span>
+                        <div class="explanation">
+                            <h4>Signature</h4>
+                            Because the server and client have agreed to perform
+                            key exchange with ephemeral keys, they are not using
+                            the public and private keys associated with the server
+                            certificate. To prove that the server owns the
+                            certificate (giving the certificate validity in
+                            this TLS session), it signs the ephemeral public
+                            key with the private key associated with the server's
+                            certificate. This signature can be validated with
+                            the public key included in the server's certificate.
+                            <ul>
+                                <li><tt>04 01</tt> - reserved value for RSA signature with SHA256 hash
+                                </li>
+                                <li><tt>01 00</tt> - length of signature (0x100 or 256 bytes)
+                                </li>
+                                <li><tt>04 02 b6 ... ac 41 fb</tt> - the
+                                    computed signature for <tt>SHA256(client_hello_random
+                                        + server_hello_random + curve_info + public_key)</tt>
+                                </li>
+                            </ul>
+                            We can compute the signature ourselves using
+                            the <a href="https://tls12.xargs.org/files/server.key" download="server.key">server's
+                                private key</a>,
+                            at the command line:
+                            <codesample class="">
+                                <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
+
+                                <pre><code>### client random from Client Hello
 $ echo -en '\x00\x01\x02\x03\x04\x05\x06\x07'  &gt; /tmp/compute
 $ echo -en '\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f' &gt;&gt; /tmp/compute
 $ echo -en '\x10\x11\x12\x13\x14\x15\x16\x17' &gt;&gt; /tmp/compute
@@ -638,12 +780,12 @@ $ openssl dgst -sign server.key -sha256 /tmp/compute | hexdump
 ... snip ...
 00000f0 7d 87 dc 33 18 64 35 71 22 6c 4d d2 c2 ac 41 fb
 </code></pre>
-            </codesample>
+                            </codesample>
+                        </div>
+                    </span>
+                </span>
+            </div>
         </div>
-    </span>
-</span>
-</div>
-</div>
 
 
 
@@ -651,19 +793,22 @@ $ openssl dgst -sign server.key -sha256 /tmp/compute | hexdump
 
 
 
-<div id="templates" style="display: none">
-    <div id="closeBtnTmpl">
-        <span class="close">×</span>
-    </div>
-    <div id="showCodeTmpl">
-        <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
-    </div>
-    <button id="annotateTmpl" class="annotate-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
-</div>
+        <div id="templates" style="display: none">
+            <div id="closeBtnTmpl">
+                <span class="close">×</span>
+            </div>
+            <div id="showCodeTmpl">
+                <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
+            </div>
+            <button id="annotateTmpl" class="annotate-toggle"
+                onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
+        </div>
 
-<a class="print-mode" href="#print" onclick="ill.printMode()">
-    [print]
-</a>
+        <a class="print-mode" href="#print" onclick="ill.printMode()">
+            [print]
+        </a>
 
 
-</body></html>
+</body>
+
+</html>
