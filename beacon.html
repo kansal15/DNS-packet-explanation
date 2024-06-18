@@ -20,13 +20,8 @@
             <a class="this-page" href="https://tls12.xargs.org/">TLS 1.2</a>
         </div>
         <div class="container">
-            <h1>The Illustrated DNS Packets</h1>
+            <h1>Explaning 802.11 Beacon frames</h1>
 
-            <h3>Every byte explained and reproduced</h3>
-
-            <div class="outerblock">
-                <p>A detailed bit by bit explaination of various types of dns packets</p>
-            </div>
 
             <div class="open-close-all outerbox">
                 <button id="openCloseAll" class="data-toggle" data-lbl-state="open" data-lbl-toggle="Close All" onclick="ill.openCloseAll(this, event)">Open All</button>
@@ -39,6 +34,7 @@
                     <div class="rec-label">Header</div>
 
                     <div class="rec-explanation">
+                        In 802.11 wireless networks, there are 4 types of frames, namely, Management, Control, Data, and Extension frames. In this post, we will discuss about 802.11 Beacon frames, which is of mamagement type.
                         The session begins with the client saying "Hello". The client provides the following:
                         <ul>
                             Where each of these fields is as described below:
