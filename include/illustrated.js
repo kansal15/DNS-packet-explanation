@@ -22,7 +22,7 @@
     // events
 
     ill.unselectAllRecords = () => {
-        [].forEach.call(document.querySelectorAll(".illustrated .record.selected, .illustrated .calculation.selected"),
+        [].forEach.call(document.querySelectorAll(".tlsbody .record.selected, .tlsbody .calculation.selected"),
         (el) => {
             el.classList.remove("selected");
         });
@@ -108,9 +108,9 @@
             ill.anchors[label] = record;
             ill.anchors[`${label}/annotated`] = record;
             record.insertBefore(
-                htmlToElement(`<a class="no-show" href="#${label}/annotated"></a>`), record.firstChild);
+                htmlToElement(`<a class="d-none" href="#${label}/annotated"></a>`), record.firstChild);
             record.insertBefore(
-                htmlToElement(`<a class="no-show" href="#${label}"></a>`), record.firstChild);
+                htmlToElement(`<a class="d-none" href="#${label}"></a>`), record.firstChild);
         }
     };
 
@@ -126,19 +126,19 @@
         }
         ill.selectRecord(rec, null);
         if (hash.endsWith("/annotated")) {
-            const b = rec.getElementsByClassName("annotate-toggle");
+            const b = rec.getElementsByClassName("data-toggle");
             if (b && b.length) {
                 ill.toggleAnnotate(b[0].parentElement);
             }
         }
     };
 
-    ill.addToggleAnnotations = (record) => {
-        let expl = record.querySelector(".rec-explanation"),
-            copy = document.getElementById("annotateTmpl").cloneNode(true);
+    // ill.addToggleAnnotations = (record) => {
+        // let expl = record.querySelector(".rec-explanation"),
+        //     copy = document.getElementById("annotateTmpl").cloneNode(true);
         // noinspection JSCheckFunctionSignatures
-        expl.insertAdjacentElement("afterend", copy);
-    };
+        // expl.insertAdjacentElement("afterend", copy);
+    // };
 
     ill.injectLabels = () => {
         let els = document.querySelectorAll(".string > .explanation, .decryption > .explanation");
@@ -233,7 +233,7 @@
             };
         });
         [].forEach.call(document.querySelectorAll(".record"), (el) => {
-            ill.addToggleAnnotations(el);
+            // ill.addToggleAnnotations(el);
         });
         [].forEach.call(document.querySelectorAll("codesample"), (el) => {
             ill.addShowCode(el);

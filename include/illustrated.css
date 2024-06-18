@@ -18,7 +18,7 @@ body {
 
 /* hide keys when there is no room for them */
 @media (max-width: 600px) {
-    .illustration {
+    .imgBlock {
         display: none !important;
     }
     .print-mode {
@@ -90,7 +90,7 @@ tt.longboi {
 
 /***** .record and .calculation *****/
 
-.rec-outer {
+.outerbox {
     max-width: 800px;
     margin: 0.8em auto;
 }
@@ -104,15 +104,15 @@ tt.longboi {
     box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
 }
 
-.illustrated .server.record .rec-label:before {
+.tlsbody .server.record .rec-label:before {
     content: "❰ ";
     color: #888;
 }
-.illustrated .client.record .rec-label:before {
+.tlsbody .client.record .rec-label:before {
     content: "❱ ";
     color: #888;
 }
-.illustrated .calculation .rec-label:before {
+.tlsbody .calculation .rec-label:before {
     content: "± ";
     font-weight: bold;
     color: #888;
@@ -143,8 +143,8 @@ tt.longboi {
     padding: 0 0 10px 0;
     width: 0;
 }
-.illustrated .record.selected .rec-label:after,
-.illustrated .calculation.selected .rec-label:after {
+.tlsbody .record.selected .rec-label:after,
+.tlsbody .calculation.selected .rec-label:after {
     color: #888;
     content: " ×";
     font-weight: bold;
@@ -178,21 +178,21 @@ tt.longboi {
     display: block;
 }
 
-.record .illustration,
-.calculation .illustration {
+.record .imgBlock,
+.calculation .imgBlock {
     margin: -40px 0 0 0;
     display: none;
     float: right;
 }
-.record.selected .illustration,
-.calculation.selected .illustration {
+.record.selected .imgBlock,
+.calculation.selected .imgBlock {
     display: block;
 }
 
-.record > button.annotate-toggle {
+.record > button.data-toggle {
     display: none;
 }
-.record.selected > button.annotate-toggle {
+.record.selected > button.data-toggle {
     display: block;
 }
 
@@ -366,7 +366,7 @@ codesample.show pre {
 
 /***** annotation toggle button *****/
 
-button.annotate-toggle {
+button.data-toggle {
     margin-bottom: 1em;
 
     display: inline-block;
@@ -386,13 +386,13 @@ button.annotate-toggle {
     background: #f78d1d;
     background: linear-gradient(180deg, #faa51a 1%, #f47a20 100%);
 }
-button.annotate-toggle:hover {
+button.data-toggle:hover {
     text-decoration: none;
 
     background: #f47c20;
     background: linear-gradient(180deg, #f88e11 1%, #f06015 100%);
 }
-button.annotate-toggle:active {
+button.data-toggle:active {
     position: relative;
     top: 1px;
 }
