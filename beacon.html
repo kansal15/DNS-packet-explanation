@@ -31,7 +31,7 @@
                 <div class="record client" data-anchor="client-hello">
                     <a class="d-none" href="#client-hello"></a>
                     <a class="d-none" href="#client-hello/annotated"></a>
-                    <div class="rec-label">Header</div>
+                    <div class="rec-label">Beacon</div>
 
                     <div class="rec-explanation">
                         In 802.11 wireless networks, there are 4 types of frames, namely, Management, Control, Data, and Extension frames. In this post, we will discuss about 802.11 Beacon frames, which is of mamagement type.
@@ -47,9 +47,9 @@
                     <button id="annotateTmpl" class="data-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
                     <span class="record-data">
                         <span class="string">
-                            <span class="label">Transaction ID</span>
+                            <span class="label">Frame Control</span>
                             <span class="bytes">
-                                5e 6e
+                                80 00
                             </span>
                             <div class="explanation">
                                 <h4></h4>
@@ -58,9 +58,9 @@
                         </span>
 
                         <span class="string">
-                            <span class="label">Flags</span>
+                            <span class="label">Duration/ID</span>
                             <span class="bytes">
-                                01 00
+                                00 00
                             </span>
                             <div class="explanation">
                                 <h4></h4>
