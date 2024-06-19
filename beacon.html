@@ -52,16 +52,16 @@
                             </span>
                             <div class="explanation">
                                 <h4></h4>
-                                In the beacon frame,the first 2 bytes are frame control field.
+                                In the beacon frame,the first 2 bytes are frame control field. Version, Type and Subtype are always present in Frame Control Packet.
                                 
                                 <ul>
                                    <li><tt>.... ..00</tt>= Version: 0</li>
                                    <li><tt>.... 00..</tt>= Type: Management frame (0)</li>
                                    <li><tt>1000 ....</tt>= Subtype: 8</li>
                                 <ul>
-                                   <li><b>Version</b> is a one bit field that specifies whether this message is a query (0), or a response (1).</li>
-                                   <li><b>Type</b> is a one bit field that specifies whether this message is a query (0), or a response (1).</li>
-                                   <li><b>Subtype</b> is a one bit field that specifies whether this message is a query (0), or a response (1).</li>
+                                   <li><b>Version</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1) </li>
+                                   <li><b>Type</b> It is also 2 bit field. Type decides the type of Packet. Packet can be management, Control,Data or Extended. 0 defines management frame,1 defines control frame, 2 defines data frame and 3 defines extedned frame</li>
+                                   <li><b>Subtype</b> It is also 2 bit field. This field defines the subtype of management, control, data and extended frame like Association request, Association response, probe request, probe response, beacon, authentication, deauthentication are subtype of management type. RTS/CTS, ACK, Block-ACK,PS-Poll etc are subtype of control frames. QOS, CF-ACK, CF-Poll, QOS Null etc are subtype of Data type frame. Extended type is new to 802.11. DMG beacon and S1G beacon are subtype of Extension frame.</li>
                                 </div>
                         </span>
 
