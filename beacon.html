@@ -56,11 +56,11 @@
                                 
                                 <ul>
                                    <li><tt>.... ..00</tt>= Version: 0</li>
-                                   <li><tt>.... 00..</tt>= Type: Management frame (0)</li>
+                                   <li><tt>.... 00..</tt>= Type: Management frame (00)</li>
                                    <li><tt>1000 ....</tt>= Subtype: 8</li>
                                 <ul>
                                    <li><b>Version</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1) </li>
-                                   <li><b>Type</b> It is also 2 bit field. Type decides the type of Packet. Packet can be management, Control,Data or Extended. 0 defines management frame,1 defines control frame, 2 defines data frame and 3 defines extedned frame</li>
+                                   <li><b>Type</b> It is also 2 bit field. Type decides the type of Packet. Packet can be management, Control,Data or Extended. 00 defines management frame, 01 defines control frame, 10 defines data frame and 11 defines extedned frame</li>
                                    <li><b>Subtype</b> It is also 2 bit field. This field defines the subtype of management, control, data and extended frame like Association request, Association response, probe request, probe response, beacon, authentication, deauthentication are subtype of management type. RTS/CTS, ACK, Block-ACK,PS-Poll etc are subtype of control frames. QOS, CF-ACK, CF-Poll, QOS Null etc are subtype of Data type frame. Extended type is new to 802.11. DMG beacon and S1G beacon are subtype of Extension frame.</li>
                                 </div>
                         </span>
