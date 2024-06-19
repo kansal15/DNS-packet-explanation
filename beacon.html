@@ -39,7 +39,7 @@
                         <ul>
                             Where each of these fields is as described below:
                             <li>
-                                <b>ID</b> A 16 bit identifier assigned by the program that generates any kind of query. This identifier is copied the corresponding reply and can be used by the requester to match up replies to outstanding
+                                <b>Type/Subtype:Beacon Frame</b> A 16 bit identifier assigned by the program that generates any kind of query. This identifier is copied the corresponding reply and can be used by the requester to match up replies to outstanding
                                 queries. You should select a new, random 16 bit number for each request.
                             </li>
                         </ul>
@@ -53,7 +53,11 @@
                             </span>
                             <div class="explanation">
                                 <h4></h4>
-                                A 16 bit identifier assigned by the program that generates any kind of query. This identifier is copied the corresponding reply and can be used by the requester to match up replies to outstanding querie
+                                In the beacon frame,the first 2 bytes are frame control field.
+                                .... ..00 = Version: 0
+                                .... 00.. = Type: Management frame (0)
+                                1000 .... = Subtype: 8
+
                             </div>
                         </span>
 
