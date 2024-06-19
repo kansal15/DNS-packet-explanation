@@ -36,7 +36,7 @@
                     <div class="rec-explanation">
                         In 802.11 wireless networks, there are 4 types of frames, namely, Management, Control, Data, and Extension frames. In this post, we will discuss about 802.11 Beacon frames, which is of management type.
                         The session begins with the client saying "Hello". The client provides the following:
-                         <img src="include/802.11_frame.png" alt="Beacon Frame" style="max-width:100%;"> 
+                         <img src="include/802.11_frame.png" alt="Beacon Frame" style="max-width:100%;padding-top: 15px;"> 
                     </div>
                     <button id="annotateTmpl" class="data-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
                     <span class="record-data">
@@ -48,7 +48,7 @@
                             <div class="explanation">
                                 <h4></h4>
                                 In the beacon frame,the first 2 bytes are frame control field. Version, Type and Subtype are always present in Frame Control Packet.
-                                
+                                <img src="include/802.11_Frame_Control.png" alt="Frame Control" style="max-width:100%;padding-top: 15px;">
                                 <ul>
                                    <li><tt>.... ..00</tt>= Version: 0</li>
                                    <li><tt>.... 00..</tt>= Type: Management frame (00)</li>
