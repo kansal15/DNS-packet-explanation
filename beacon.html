@@ -8,8 +8,8 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="title" content="The Illustrated TLS 1.2 Connection" />
         <meta name="description" content="Every byte of a TLS connection explained and reproduced" />
-        <link rel="stylesheet" href="include/frombootstrap.css" />
-        <link rel="stylesheet" href="include/illustrated.css" />
+        <link href="include/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="include/css/style.css" />
     </head>
 
     <body class="tlsbody">
@@ -20,7 +20,7 @@
             <a class="this-page" href="https://tls12.xargs.org/">TLS 1.2</a>
         </div>
         <div class="container">
-            <h1>Explaning 802.11 Beacon frames</h1>
+            <h1 class="heading">Explaning 802.11 Beacon frames</h1>
 
 
             <div class="open-close-all outerbox">
@@ -36,7 +36,7 @@
                     <div class="rec-explanation">
                         In 802.11 wireless networks, there are 4 types of frames, namely, Management, Control, Data, and Extension frames. In this post, we will discuss about 802.11 Beacon frames, which is of management type.
                         The session begins with the client saying "Hello". The client provides the following:
-                         <img src="include/802.11_frame.png" alt="Beacon Frame" style="max-width:100%;padding-top: 15px;"> 
+                         <img src="include/img/802.11_frame.png" alt="Beacon Frame" style="max-width:100%;padding-top: 15px;"> 
                     </div>
                     <button id="annotateTmpl" class="data-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
                     <span class="record-data">
@@ -48,7 +48,7 @@
                             <div class="explanation">
                                 <h4></h4>
                                 In the beacon frame,the first 2 bytes are frame control field. Version, Type and Subtype are always present in Frame Control Packet.
-                                <img src="include/802.11_Frame_Control.png" alt="Frame Control" style="max-width:100%;padding-top: 15px;">
+                                <img src="include/img/802.11_Frame_Control.png" alt="Frame Control" style="max-width:100%;padding-top: 15px;">
                                 <ul>
                                    <li><tt>.... ..00</tt>= Version: 0</li>
                                    <li><tt>.... 00..</tt>= Type: Management frame (00)</li>
@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            <div class="outerbox">
+            <!-- <div class="outerbox">
                 <div class="record server" data-anchor="server-hello">
                     <a class="d-none" href="#server-hello"></a><a class="d-none" href="#server-hello/annotated"></a>
                     <div class="rec-label">Question</div>
@@ -561,12 +561,11 @@ $ openssl dgst -sign server.key -sha256 /tmp/compute | hexdump
                     <button class="show-code" onclick="ill.showCode(this, event)">Show Code</button>
                 </div>
                 <button id="annotateTmpl" class="data-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
-            </div>
+            </div> -->
 
-            <a class="print-mode" href="#print" onclick="ill.printMode()">
-                [print]
-            </a>
+          
         </div>
-        <script src="include/illustrated.js"></script>
+        <script src="include/plugin/bootstrap/js/bootstrap.bundle.js" ></script>
+        <script src="include/js/common.js"></script>
     </body>
 </html>

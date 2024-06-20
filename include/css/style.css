@@ -1,4 +1,81 @@
 /* remove focus rings for non-keyboard users */
+
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+//* roboto-100 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../font/roboto/roboto-v30-latin-100.woff2') format('woff2'); 
+  }
+  /* roboto-300 - latin */
+  @font-face {
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../font/roboto/roboto-v30-latin-300.woff2') format('woff2'); 
+  }
+  /* roboto-regular - latin */
+  @font-face {
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../font/roboto/roboto-v30-latin-regular.woff2') format('woff2'); 
+  }
+  /* roboto-500 - latin */
+  @font-face {
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../font/roboto/roboto-v30-latin-500.woff2') format('woff2'); 
+  }
+  /* roboto-700 - latin */
+  @font-face {
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../font/roboto/roboto-v30-latin-700.woff2') format('woff2'); 
+  }
+  /* roboto-900 - latin */
+  @font-face {
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../font/roboto/roboto-v30-latin-900.woff2') format('woff2'); 
+  }
+body {
+    margin: 0;
+    font-family: 'Roboto';
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+}
+
+
 body:not(.user-is-tabbing) button:focus,
 body:not(.user-is-tabbing) input:focus,
 body:not(.user-is-tabbing) select:focus,
@@ -6,15 +83,65 @@ body:not(.user-is-tabbing) textarea:focus {
     outline: none;
 }
 
-body {
-    /* printmode */
-    position: relative;
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
-.container {
-    /* printmode */
-    overflow: auto;
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
 }
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+pre,
+code,
+kbd,
+samp {
+    font-family: 'Roboto';
+    font-size: 1em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+h1, .h1 {
+    font-size: 2.5rem;
+}
+h2, .h2 {
+    font-size: 2rem;
+}
+h3, .h3 {
+    font-size: 1.75rem;
+}
+h4, .h4 {
+    font-size: 1.5rem;
+}
+h5, .h5 {
+    font-size: 1.25rem;
+}
+h6, .h6 {
+    font-size: 1rem;
+}
+
+pre {
+    display: block;
+    font-size: 87.5%;
+    color: #212529;
+}
+
+
+
 
 /* hide keys when there is no room for them */
 @media (max-width: 600px) {
@@ -35,7 +162,7 @@ h1:before {
 h1, h3 {
     text-align: center;
     padding: 10px;
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -81,41 +208,44 @@ tt.longboi {
 }
 
 .server {
-    background-color: #D0E8F5;
+    background-color: #eaf0f9;
 }
 
 .client {
-    background-color: #D8EDCF;
+    background-color: #eaf0f9;
+}
+.heading{
+    padding-top: 30px;
 }
 
 /***** .record and .calculation *****/
 
 .outerbox {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0.8em auto;
 }
 
 .record, .calculation {
     cursor: pointer;
-    max-width: 800px;
+    max-width: 100%;
     padding: 1em;
     border-radius: 1em;
     border: 2px solid transparent;
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+    box-shadow:1px 3px 3px rgb(0 0 0 / 15%);
 }
 
 .tlsbody .server.record .rec-label:before {
     content: "❰ ";
-    color: #888;
+    color: #0554cb;
 }
 .tlsbody .client.record .rec-label:before {
     content: "❱ ";
-    color: #888;
+    color: #0554cb;
 }
 .tlsbody .calculation .rec-label:before {
     content: "± ";
     font-weight: bold;
-    color: #888;
+    color: #0554cb;
 }
 
 .rec-label {
@@ -135,7 +265,7 @@ tt.longboi {
 .record.selected,
 .calculation.selected {
     cursor: inherit;
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+    box-shadow:1px 3px 3px rgb(0 0 0 / 15%);
 }
 
 .record.selected .rec-label,
@@ -145,7 +275,7 @@ tt.longboi {
 }
 .tlsbody .record.selected .rec-label:after,
 .tlsbody .calculation.selected .rec-label:after {
-    color: #888;
+    color: #0554cb;
     content: " ×";
     font-weight: bold;
     cursor: pointer;
@@ -163,7 +293,7 @@ tt.longboi {
 
 .record:hover,
 .calculation:hover {
-    border: 2px solid #666;
+    border: 2px solid #a7c2e9;
 }
 .record.selected:hover,
 .calculation.selected:hover {
@@ -256,11 +386,11 @@ tt.longboi {
     color: black;
     margin: 1em 0;
     padding: 1em;
-    background-color: #FAF7DC;
-    border: 2px solid #e0d998;
+    background-color: #cadaf1;
+    border: 1px solid #a7c2e9;
     border-radius: 1em;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+    box-shadow: 1px 4px 2px rgb(0 0 0 / 10%);
 }
 
 .record.annotate .string > .explanation:before {
@@ -275,8 +405,8 @@ tt.longboi {
     top: -7px;
     left: 20px;
     border: 2px solid;
-    background-color: #FAF7DC;
-    border-color: #e0d998 transparent transparent #e0d998;
+    background-color: #cadaf1;
+    border-color: #a7c2e9 transparent transparent #a7c2e9;
 }
 
 .record.annotate .string > .label {
@@ -291,12 +421,12 @@ tt.longboi {
 .record .decryption > .label:before {
     content: "⬇ ";
     font-weight: bold;
-    color: #888;
+    color: #0554cb;
 }
 .record .decryption > .label:after {
     content: " ⬇";
     font-weight: bold;
-    color: #888;
+    color: #0554cb;
 }
 
 .string .bytes {
@@ -374,7 +504,7 @@ button.data-toggle {
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    font: Arial, Helvetica, sans-serif;
+    
     font-size: 1em;
     padding: .4em 1.7em .45em;
     text-shadow: 0 1px 1px rgba(0,0,0,0.4);
@@ -382,15 +512,12 @@ button.data-toggle {
     box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 
     color: #fff;
-    border: solid 1px #da7c0c;
-    background: #f78d1d;
-    background: linear-gradient(180deg, #faa51a 1%, #f47a20 100%);
+    border: solid 1px #0050c7;
+    background: linear-gradient(180deg, #4b93ff 1%, #0050c7 100%);
 }
 button.data-toggle:hover {
     text-decoration: none;
-
-    background: #f47c20;
-    background: linear-gradient(180deg, #f88e11 1%, #f06015 100%);
+    background: linear-gradient(180deg, #7dacf1 1%, #1365df 100%);
 }
 button.data-toggle:active {
     position: relative;

@@ -8,8 +8,9 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="title" content="Explanation of every DNS bit" />
         <meta name="description" content="Every byte of a TLS connection explained and reproduced" />
-        <link rel="stylesheet" href="include/frombootstrap.css" />
-        <link rel="stylesheet" href="include/illustrated.css" />
+
+        <link href="include/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="include/css/style.css" />
     </head>
 
     <body class="tlsbody">
@@ -20,7 +21,7 @@
             <a class="this-page" href="https://tls12.xargs.org/">TLS 1.2</a>
         </div>
         <div class="container">
-            <h1>The Illustrated DNS Packets</h1>
+            <h1 class="heading">The Illustrated DNS Packets</h1>
 
             <h3>Every byte explained and reproduced</h3>
 
@@ -564,10 +565,9 @@ $ openssl dgst -sign server.key -sha256 /tmp/compute | hexdump
                 <button id="annotateTmpl" class="data-toggle" onclick="ill.toggleAnnotate(this.parentElement, event)">Annotations</button>
             </div>
 
-            <a class="print-mode" href="#print" onclick="ill.printMode()">
-                [print]
-            </a>
+            
         </div>
-        <script src="include/illustrated.js"></script>
+       <script src="include/plugin/bootstrap/js/bootstrap.bundle.js" ></script>
+        <script src="include/js/common.js"></script>
     </body>
 </html>
