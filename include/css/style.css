@@ -168,8 +168,8 @@ h1, h3 {
 
 pre {
     margin: 1em 0;
-    overflow: scroll;
-    -ms-overflow-style: scrollbar;
+    /* overflow: scroll;
+    -ms-overflow-style: scrollbar; */
 }
 
 pre code {

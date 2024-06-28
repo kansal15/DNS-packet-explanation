@@ -133,22 +133,7 @@
         }
     };
 
-    // ill.addToggleAnnotations = (record) => {
-        // let expl = record.querySelector(".rec-explanation"),
-        //     copy = document.getElementById("annotateTmpl").cloneNode(true);
-        // noinspection JSCheckFunctionSignatures
-        // expl.insertAdjacentElement("afterend", copy);
-    // };
-
-    ill.injectLabels = () => {
-        let els = document.querySelectorAll(".string > .explanation, .decryption > .explanation");
-        [].forEach.call(els, (expl) => {
-            let label = expl.parentNode.querySelector(".label"),
-                h4 = document.createElement("h4");
-            h4.appendChild(document.createTextNode(label.textContent));
-            expl.insertAdjacentElement("afterbegin", h4);
-        });
-    };
+    
 
     /**
      * Open or close all elements on the page
@@ -238,7 +223,7 @@
         [].forEach.call(document.querySelectorAll("codesample"), (el) => {
             ill.addShowCode(el);
         });
-        ill.injectLabels();
+        // ill.injectLabels();
         ill.resolveHash();
     };
 
