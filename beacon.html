@@ -67,6 +67,8 @@
                         </span>
                         <div id="annotatebtn" class=" explanation" >
                             <h5>Frame Control (0x0008)</h5>
+							
+							
                             In the beacon frame,the first 2 bytes are frame control field. Version, Type and Subtype are
                             always present in Frame Control Packet.
                             <img src="include/img/802.11_Frame_Control.png" alt="Frame Control"
@@ -77,8 +79,9 @@
                                 <li><tt>1000 ....</tt>= Subtype: 8</li>
                             </ul>
                                 <ul class="tagExplanation">
-                                    <li><b>Version:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for
-                                        802.11ah (PV1) </li>
+                                    <li><b>Version:-</b> It is 2 bit field. Always 00 for WLAN Frames WLAN (PV0) and set to 01 for
+                                        802.11ah (PV1). 802.11ah is also known as Wi-Fi HaLow – sub 1 GHz long range, low power wireless technology standardized by Wi-Fi Alliance in 2017 for IoT devices. 
+										It uses 900 MHz license-exempt bands to provide extended-range Wi-Fi networks, compared to conventional Wi-Fi networks operating in the 2.4 GHz, 5 GHz and 6 GHz bands. </li>
                                     <li><b>Type:-</b> It is also 2 bit field. Type decides the type of Packet. Packet can
                                         be management, Control,Data or Extended. 00 defines management frame, 01 defines
                                         control frame, 10 defines data frame and 11 defines extended frame</li>
@@ -93,32 +96,41 @@
                                 <div class="mt-3 ps-4"> 
                                     <h5>Flags: 0x00</h5>
                                     <ul>
-                                        <li><tt>0... .... .... ....</tt>= QR</li>
-                                        <li><tt>.000 0... .... ....</tt>= Opcode</li>
-                                        <li><tt>.... .0.. .... ....</tt>= AA</li>
-        
-                                        <li><tt>.... ..0. .... ....</tt>= TC</li>
-                                        <li><tt>.... ...1 .... ....</tt>= RD</li>
-                                        <li><tt>.... .... 0... ....</tt>= RA</li>
-                                        <li><tt>.... .... .0.. ....</tt>= Z</li>
-                                        <li><tt>.... .... ..0. ....</tt>= authenticated Answer</li>
-                                        <li><tt>.... .... ...0 ....</tt>= Non-authenticated data: Unacceptable</li>
-                                        <li><tt>.... .... .... 0000</tt>= Response Code</li>
+                                        <li><tt>.... ..00</tt>= DS status: Not leaving DS or network is operating in AD-HOC mode (To DS: 0 From DS: 0) (0x0)</li>
+                                        <li><tt>.... .0..</tt>= More Fragments: This is the last fragment</li>
+                                        <li><tt>.... 0...</tt>= Retry: Frame is not being retransmitted</li>   
+                                        <li><tt>...0 ....</tt>= PWR MGT: STA will stay up</li>
+                                        <li><tt>..0. ....</tt>= More Data: No data buffered</li>
+                                        <li><tt>.0.. ....</tt>= Protected flag: Data is not protected</li>
+                                        <li><tt>0... ....</tt>= +HTC/Order flag: Not strictly ordered</li>
+                                      
                                     </ul>  
                                     <ul class="tagExplanation">
-                                        <li><b>Version:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for
+                                        <li><b>DS Status:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for
                                             802.11ah (PV1) </li>
-                                        <li><b>Type:-</b> It is also 2 bit field. Type decides the type of Packet. Packet can
+                                        <li><b>More Fragments:-</b> It is also 2 bit field. Type decides the type of Packet. Packet can
                                             be management, Control,Data or Extended. 00 defines management frame, 01 defines
                                             control frame, 10 defines data frame and 11 defines extended frame</li>
-                                        <li><b>Subtype:-</b> It is also 2 bit field. This field defines the subtype of
+                                        <li><b>Retry:-</b> It is also 2 bit field. This field defines the subtype of
                                             management, control, data and extended frame like Association request,
                                             Association response, probe request, probe response, beacon, authentication,
                                             deauthentication are subtype of management type. RTS/CTS, ACK, Block-ACK,PS-Poll
                                             etc are subtype of control frames. QOS, CF-ACK, CF-Poll, QOS Null etc are
                                             subtype of Data type frame. Extended type is new to 802.11. DMG beacon and S1G
                                             beacon are subtype of Extension frame.</li>
+										<li><b>PWR MGT:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for
+                                            802.11ah (PV1) </li>
+                                        <li><b>More Data:-</b> It is also 2 bit field. Type decides the type of Packet. Packet can
+                                            be management, Control,Data or Extended. 00 defines management frame, 01 defines
+                                            control frame, 10 defines data frame and 11 defines extended frame</li>
+										<li><b>Protected Flag:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for
+                                            802.11ah (PV1) </li>
+										<li><b>+HTC/Order flag:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for
+                                            802.11ah (PV1) </li>
+												
+											
                                     </ul> 
+			
                                 </div>
                                
                         </div>
@@ -126,87 +138,223 @@
 
                     <span class="string">
                  
-                        <span class="bytes" data-bs-toggle="tooltip" title="Duration/ID">
+                        <span class="bytes" data-bs-toggle="tooltip" title="Duration">
                             00 00
                         </span>
                         <div id="annotatebtn" class="explanation" >
-                            <h5>Duration/ID</h5>
-
-                            <ul>
-                                <li><tt>0... .... .... ....</tt>= QR</li>
-                                <li><tt>.000 0... .... ....</tt>= Opcode</li>
-                                <li><tt>.... .0.. .... ....</tt>= AA</li>
-
-                                <li><tt>.... ..0. .... ....</tt>= TC</li>
-                                <li><tt>.... ...1 .... ....</tt>= RD</li>
-                                <li><tt>.... .... 0... ....</tt>= RA</li>
-                                <li><tt>.... .... .0.. ....</tt>= Z</li>
-                                <li><tt>.... .... ..0. ....</tt>= authenticated Answer</li>
-                                <li><tt>.... .... ...0 ....</tt>= Non-authenticated data: Unacceptable</li>
-                                <li><tt>.... .... .... 0000</tt>= Response Code</li>
-                            </ul>
-                            <li><b>QR</b> is a one bit field that specifies whether this message is a query (0), or a
-                                response (1).</li>
-                            <li><b>OPCODE</b> is a four bit field that specifies kind of query in this message. You
-                                should use 0, representing a standard query.</li>
-                            <li>
-                                <b>AA Authoritative Answer</b> - this bit is only meaningful in responses, and specifies
-                                that the responding name server is an authority for the domain name in question section.
-                                You should use this bit to
-                                report whether or not the response you receive is authoritative.
-                            </li>
-                            <li><b>TC TrunCation</b> - specifies that this message was truncated. For this project, you
-                                must exit and return an error if you receive a response that is truncated.</li>
-                            <li><b>RD Recursion Desired</b> - this bit directs the name server to pursue the query
-                                recursively. You should use 1, representing that you desire recursion.</li>
-                            <li>
-                                <b>RA Recursion Available</b> - this be is set or cleared in a response, and denotes
-                                whether recursive query support is available in the name server. Recursive query support
-                                is optional. You must exit and
-                                return an error if you receive a response that indicates the server does not support
-                                recursion.
-                            </li>
-                            <li><b>Z</b> Reserved for future use. You must set this field to 0.</li>
-                            <li><b>RCODE Response code</b> - this 4 bit field is set as part of responses. The values
-                                have the following interpretation:</li>
-                            <ul>
-                                <li><b>NOERROR(0) </b>No error condition</li>
-                                <li><b>FORMERR(1) </b>Format error - The name server was unable to interpret the query.
-                                </li>
-                                <li><b>SERVFAIL(2) </b>Server failure - The name server was unable to process this query
-                                    due to a problem with the name server.</li>
-                                <li><b>NXDOMAIN(3) </b> - Meaningful only for responses from an authoritative name
-                                    server, this code signifies that the domain name referenced in the query does not
-                                    exist.</li>
-                                <li><b>NOTIMP(4) </b>Not Implemented - The name server does not support the requested
-                                    kind of query.</li>
-                                <li>
-                                    <b>REFUSED(5) </b> - The name server refuses to perform the specified operation for
-                                    policy reasons. You should set this field to 0, and should assert an error if you
-                                    receive a response indicating an
-                                    error condition. You should treat 3 differently, as this represents the case where a
-                                    requested name doesn’t exist
-                                </li>
-                            </ul>
+                           .000 0000 0000 0000 = Duration: 0 microseconds 
+						   
+						   
+							<p>
+								lfgodko
+							</p>
+                            
                         </div>
                     </span>
 
                       <span class="string">
                  
-                        <span class="bytes" data-bs-toggle="tooltip" title="Reciever Address">
+                        <span class="bytes" data-bs-toggle="tooltip" title="Receiver Address">
                             ff ff ff ff ff ff
                         </span>
                         <div id="annotatebtn" class="explanation" >
-                            In the beacon frame,the first 2 bytes are frame control field. Version, Type and Subtype are
-                            always present in Frame Control Packet.
+                           Receiver address: Broadcast (ff:ff:ff:ff:ff:ff)
+						   
+						   <p>
+								lfgodko
+							</p>
                           
                         </div>
                     </span>
+					
+					     <span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Destination Address">
+                            ff ff ff ff ff ff
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           Destination address: Broadcast (ff:ff:ff:ff:ff:ff)
+						   
+						   <p>
+								lfgodko
+							</p>
+                          
+                        </div>
+                    </span>
+					
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Transmitter Address">
+                            88:9c:ad:1c:24:22
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           Transmitter address: Cisco_1c:24:22 (88:9c:ad:1c:24:22)
+						   
+						   <p>
+								lfgodko
+							</p>
+                          
+                        </div>
+                    </span>
+					
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Source Address">
+                           88:9c:ad:1c:24:22
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           Source address: Cisco_1c:24:22 (88:9c:ad:1c:24:22)
+						   
+						   <p>
+								lfgodko
+							</p>
+                          
+                        </div>
+                    </span>
+					
+						<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="BSS ID">
+                           88:9c:ad:1c:24:22
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           BSS Id: Cisco_1c:24:22 (88:9c:ad:1c:24:22)
+						   
+						   <p>
+								lfgodko
+							</p>
+                          
+                        </div>
+                    </span>
+					
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Fragment Number">
+                           a0 fa
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           .... .... .... 0000 = Fragment number: 0
+						   
+						   <p>
+								lfgodko
+							</p>
+                          
+                        </div>
+                    </span>
+					
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Sequence Number">
+                           a0 fa
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           1111 1010 1010 .... = Sequence number: 4010
+						   
+						   <p>
+								lfgodko
+							</p>
+                          
+                        </div>
+                    </span>
+					
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Frame Check Sequence">
+                           c9 0d 29 2a
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           Frame check sequence: 0x2a290dc9 [unverified]
+						   
+						   <p>
+								lfgodko
+							</p>
+                          
+                        </div>
+                    </span>
+					
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="FCS Status">
+                           
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           [FCS Status: Unverified]
+						  
+						    <p>
+								lfgodko
+							</p>
+						  
+                        </div>
+                    </span>
+					
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="WLAN Flags">
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           [WLAN Flags: ........C]
+
+						   
+						   <p>
+								lfgodko
+							</p>
+                          
+                        </div>
+                    </span>
+					
+					
+
 
                     <span class="string">
                  
+                        <span class="bytes" data-bs-toggle="tooltip" title="Destination address">
+                            ff ff ff ff ff ff
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                            <h5>HH</h5>
+                            <ul>
+                                <li><tt>0... .... .... ....</tt>= QR</li>
+                                <li></li>
+                                <li></li>
+                            </ul> 
+
+                            <ul class="tagExplanation">
+                                <li><b>Version:-</b>It  is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for
+                                    802.11ah (PV1) </li>
+                                <li></li>
+                                <li></li>
+                            </ul> 
+                           
+                        </div>
+                    </span>
+					
+					<span class="string">
+                 
                         <span class="bytes" data-bs-toggle="tooltip" title="Duration/ID">
-                            GG 
+                            88 9c ad 1c 24 22
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                            <h5>HH</h5>
+                            <ul>
+                                <li><tt>0... .... .... ....</tt>= QR</li>
+                                <li></li>
+                                <li></li>
+                            </ul> 
+
+                            <ul class="tagExplanation">
+                                <li><b>Version:-</b>It  is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for
+                                    802.11ah (PV1) </li>
+                                <li></li>
+                                <li></li>
+                            </ul> 
+                           
+                        </div>
+                    </span>
+					
+						<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Duration/ID">
+                           a0 fa
                         </span>
                         <div id="annotatebtn" class="explanation" >
                             <h5>HH</h5>
@@ -226,6 +374,8 @@
                         </div>
                     </span>
 
+
+
                     
 
                     
@@ -234,6 +384,103 @@
                 </div>
             </div>
            
+		            <div class="card border-0 mb-3">
+                <div class="card-header p-0 border-0" id="heading-2">
+                    <button class="btn btn-link accordion-title border-0 collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#collapse-2" aria-expanded="false" aria-controls="#collapse-2"><i
+                            class="fas fa-plus text-center d-flex align-items-center justify-content-center h-100"></i>802.11 Wireless Management`</button>
+                </div>
+                <div id="collapse-2" class="collapse openaccording" aria-labelledby="heading-2" data-parent="#accordion">
+                    <div class="card-body accordion-body">
+                        <div class="">
+                            In 802.11 wireless networks, there are 4 types of frames, namely, Management, Control, Data, and
+                            Extension frames. In this post, we will discuss about 802.11 Beacon frames, which is of management
+                            type.
+                            The session begins with the client saying "Hello". The client provides the following:
+                            <img src="include/img/802.11_frame.png" alt="Beacon Frame"
+                                style="max-width:100%;padding-top: 15px;">
+                        </div>
+                        <div class="mt-3">
+                            <button id="annotateid" class="btn btn-primary data-toggle">Annotations</button>
+                        </div>
+                       
+                <span class="record-data">
+                    
+					     <span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Duration">
+                            e7 c4 f2 2d 22 02 00 00 
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           .000 0000 0000 0000 = Duration: 0 microseconds 
+						   
+						   
+							<p>
+								lfgodko
+							</p>
+                            
+                        </div>
+                    </span>
+					
+					
+					     <span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Duration">
+                            c8 00
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+                           .000 0000 0000 0000 = Duration: 0 microseconds 
+						   
+						   
+							<p>
+								lfgodko
+							</p>
+                            
+                        </div>
+                    </span>
+	
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Duration">
+                            11 14
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+							   .000 0000 0000 0000 = Duration: 0 microseconds 
+							   
+							   
+							<p>
+								lfgodko
+							</p>
+                            
+                        </div>
+                    </span>
+					
+					
+					<span class="string">
+                 
+                        <span class="bytes" data-bs-toggle="tooltip" title="Duration">
+                             00 05 4c 45 48 41 52
+
+                        </span>
+                        <div id="annotatebtn" class="explanation" >
+							   .000 0000 0000 0000 = Duration: 0 microseconds 
+							   
+							   
+							<p>
+								lfgodko
+							</p>
+                            
+                        </div>
+                    </span>
+					
+					
+	
+				
+                    
+                </span>
+                    </div>
+                </div>
+            </div>
       
         </div>
     </div>
