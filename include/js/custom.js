@@ -27,7 +27,7 @@
 
   });
 
-  $('#annotateid').click(function () {
+  $('.data-toggle').click(function () {
       if($('.explanation'). hasClass("show"))
       {
           $('.explanation'). removeClass("show");
