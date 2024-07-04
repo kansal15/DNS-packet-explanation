@@ -270,7 +270,9 @@ button.data-toggle:active {
     top: 1px;
 }
 
-
+.bluecolor{
+	color: #0048b2;
+}
 
 #accordion .accordion-title {
     position: relative;
@@ -367,11 +369,11 @@ background-color: #cadaf1;
 border-color: #a7c2e9 transparent transparent #a7c2e9;
 }
 
-.explanation{
+.accordion-body .annotateSection .explanation{
 display: none;
 }
 
-.explanation.show{
+.accordion-body .annotateSection.show .explanation{
 display: block;
 }
 
