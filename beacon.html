@@ -451,16 +451,16 @@
                                             </span>
                                             <div id="annotatebtn" class="explanation">
                                                 <h6>SSID parameter set: "LEHAR"</h6>
-												<ul>
-                                                    <li> <span class="bluecolor fw-bold">00:-</span> Tag Number: SSID parameter set (0)</li>
-													<li> <span class="bluecolor fw-bold">05:-</span> Tag Length: 5</li>
-													<li> <span class="bluecolor fw-bold">4c 45 48 41 52:-</span> SSID: LEHAR</li>
+                                                <ul>
+                                                    <li><span class="bluecolor fw-bold">00:-</span> Tag Number: SSID parameter set (0)</li>
+                                                    <li><span class="bluecolor fw-bold">05:-</span> Tag Length: 5</li>
+                                                    <li><span class="bluecolor fw-bold">4c 45 48 41 52:-</span> SSID: LEHAR</li>
                                                 </ul>
                                             </div>
                                         </span>
 
                                         <span class="string">
-                                            <span class="bytes" data-bs-toggle="tooltip" title='Supported Rates 48, 54(B), [Mbit/sec]'>
+                                            <span class="bytes" data-bs-toggle="tooltip" title="Supported Rates 48, 54(B), [Mbit/sec]">
                                                 01 02 60 ec
                                             </span>
                                             <div id="annotatebtn" class="explanation">
@@ -468,15 +468,15 @@
 
                                                 <ul>
                                                     <li><span class="bluecolor fw-bold">01:-</span> Tag Number: Supported Rates (1)</li>
-													<li><span class="bluecolor fw-bold">02:-</span> Tag Length: 2</li>
-													<li><span class="bluecolor fw-bold">01:-</span> Supported Rates: 48 (0x60)</li>
-													<li><span class="bluecolor fw-bold">01:-</span> Supported Rates: 54(B) (0xec)</li>
+                                                    <li><span class="bluecolor fw-bold">02:-</span> Tag Length: 2</li>
+                                                    <li><span class="bluecolor fw-bold">01:-</span> Supported Rates: 48 (0x60)</li>
+                                                    <li><span class="bluecolor fw-bold">01:-</span> Supported Rates: 54(B) (0xec)</li>
                                                 </ul>
                                             </div>
                                         </span>
 
                                         <span class="string">
-                                            <span class="bytes" data-bs-toggle="tooltip" title='DS Parameter set: Current Channel: 1'>
+                                            <span class="bytes" data-bs-toggle="tooltip" title="DS Parameter set: Current Channel: 1">
                                                 03 01 01
                                             </span>
                                             <div id="annotatebtn" class="explanation">
@@ -484,14 +484,14 @@
 
                                                 <ul>
                                                     <li><span class="bluecolor fw-bold">01:-</span> Tag Number: DS Parameter set (3)</li>
-													<li><span class="bluecolor fw-bold">01:-</span> Tag Length: 1</li>
-													<li><span class="bluecolor fw-bold">01:-</span> Current Channel: 1</li>
+                                                    <li><span class="bluecolor fw-bold">01:-</span> Tag Length: 1</li>
+                                                    <li><span class="bluecolor fw-bold">01:-</span> Current Channel: 1</li>
                                                 </ul>
                                             </div>
                                         </span>
 
                                         <span class="string">
-                                            <span class="bytes" data-bs-toggle="tooltip" title='Traffic Indication Map (TIM): DTIM 2 of 5 bitmap'>
+                                            <span class="bytes" data-bs-toggle="tooltip" title="Traffic Indication Map (TIM): DTIM 2 of 5 bitmap">
                                                 05 04 02 05 00 00
                                             </span>
                                             <div id="annotatebtn" class="explanation">
@@ -499,22 +499,23 @@
 
                                                 <ul>
                                                     <li><span class="bluecolor fw-bold">05:-</span> Tag Number: Traffic Indication Map (TIM) (5)</li>
-													<li><span class="bluecolor fw-bold">04:-</span> Tag Length: 4</li>
-													<li><span class="bluecolor fw-bold">02:-</span> DTIM Count: 2</li>
-													<li><span class="bluecolor fw-bold">05:-</span> DTIM Period: 5</li>
-													<li><span class="bluecolor fw-bold">00:-</span> Bitmap Control:0x00
-														<ul class="mt-0">
-															<li><tt>.... ...0</tt>= Multicast: False</li>
-															<li><tt>0000 000.</tt>= Bitmap Offset: 0x00</li>
-															<li>Partial Virtual Bitmap:00</li>
-														</ul>
-													</li>
+                                                    <li><span class="bluecolor fw-bold">04:-</span> Tag Length: 4</li>
+                                                    <li><span class="bluecolor fw-bold">02:-</span> DTIM Count: 2</li>
+                                                    <li><span class="bluecolor fw-bold">05:-</span> DTIM Period: 5</li>
+                                                    <li>
+                                                        <span class="bluecolor fw-bold">00:-</span> Bitmap Control:0x00
+                                                        <ul class="mt-0">
+                                                            <li><tt>.... ...0</tt>= Multicast: False</li>
+                                                            <li><tt>0000 000.</tt>= Bitmap Offset: 0x00</li>
+                                                            <li>Partial Virtual Bitmap:00</li>
+                                                        </ul>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </span>
-										
-										 <span class="string">
-                                            <span class="bytes" data-bs-toggle="tooltip" title='Country Information: Country Code IN, Environment Global operating classes'>
+
+                                        <span class="string">
+                                            <span class="bytes" data-bs-toggle="tooltip" title="Country Information: Country Code IN, Environment Global operating classes">
                                                 07 06 49 4e 04 01 0b 24
                                             </span>
                                             <div id="annotatebtn" class="explanation">
@@ -522,20 +523,122 @@
 
                                                 <ul>
                                                     <li><span class="bluecolor fw-bold">07:-</span> Tag Number: Country Information (7)</li>
-													<li><span class="bluecolor fw-bold">06:-</span> Tag length: 6</li>
-													<li><span class="bluecolor fw-bold">49 4e:-</span> Code: IN</li>
-													<li><span class="bluecolor fw-bold">04:-</span> Environment: Global operating classes (4)</li>
-													<li><span class="bluecolor fw-bold">01 0b 24:-</span> Country Info: First Channel Number: 1, Number of Channels: 11, Maximum Transmit Power Level: 36 dBm</li>
-														<ul class="mt-0">
-															<li>First Channel Number: 1</li>
-															<li>Number of Channels: 11</li>
-															<li>Maximum Transmit Power Level: 36 dBm</li>
-														</ul>
+                                                    <li><span class="bluecolor fw-bold">06:-</span> Tag length: 6</li>
+                                                    <li><span class="bluecolor fw-bold">49 4e:-</span> Code: IN</li>
+                                                    <li><span class="bluecolor fw-bold">04:-</span> Environment: Global operating classes (4)</li>
+                                                    <li>
+                                                        <span class="bluecolor fw-bold">01 0b 24:-</span> Country Info: First Channel Number: 1, Number of Channels: 11, Maximum Transmit Power Level: 36 dBm
+                                                        <ul class="mt-0">
+                                                            <li>First Channel Number: 1</li>
+                                                            <li>Number of Channels: 11</li>
+                                                            <li>Maximum Transmit Power Level: 36 dBm</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </span>
+
+                                        <span class="string">
+                                            <span class="bytes" data-bs-toggle="tooltip" title="Power Constraint: 0">
+                                                20 01 00
+                                            </span>
+                                            <div id="annotatebtn" class="explanation">
+                                                <h6>Power Constraint: 0</h6>
+
+                                                <ul>
+                                                    <li><span class="bluecolor fw-bold">20:-</span> Tag: Power Constraint: 0</li>
+                                                    <li><span class="bluecolor fw-bold">01:-</span> Tag length: 1</li>
+                                                    <li><span class="bluecolor fw-bold">00:-</span> Local Power Constraint: 0</li>
+                                                </ul>
+                                            </div>
+                                        </span>
+
+                                        <span class="string">
+                                            <span class="bytes" data-bs-toggle="tooltip" title="Tag: TPC Report Transmit Power: 18, Link Margin: 0">
+                                                23 02 12 00
+                                            </span>
+                                            <div id="annotatebtn" class="explanation">
+                                                <h6>Tag: TPC Report Transmit Power: 18, Link Margin: 0</h6>
+
+                                                <ul>
+                                                    <li><span class="bluecolor fw-bold">23:-</span> Tag Number: TPC Report (35)</li>
+                                                    <li><span class="bluecolor fw-bold">02:-</span> Tag length: 2</li>
+                                                    <li><span class="bluecolor fw-bold">12:-</span> Transmit Power: 18</li>
+                                                    <li><span class="bluecolor fw-bold">00:-</span> Link Margin: 0</li>
+                                                </ul>
+                                            </div>
+                                        </span>
+
+                                        <span class="string">
+                                            <span class="bytes" data-bs-toggle="tooltip" title="ERP Information">
+                                                2a 01 04
+                                            </span>
+                                            <div id="annotatebtn" class="explanation">
+                                                <h6>ERP Information</h6>
+
+                                                <ul class="mt-0">
+                                                    <li><span class="bluecolor fw-bold">2a:-</span> Tag Number: ERP Information (42)</li>
+                                                    <li><span class="bluecolor fw-bold">01:-</span> Tag length: 1</li>
+
+                                                    <li>
+                                                        <span class="bluecolor fw-bold">04:-</span> ERP Information: 0x04
+                                                        <ul>
+                                                            <li><tt>.... ...0</tt>= Non ERP Present: Not set</li>
+                                                            <li><tt>.... ..0.</tt>= Use Protection: Not set</li>
+                                                            <li><tt>.... .1..</tt>= Barker Preamble Mode: Set</li>
+                                                            <li><tt>0000 0...</tt>= Reserved: 0x00</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </span>
+
+                                        <span class="string">
+                                            <span class="bytes" data-bs-toggle="tooltip" title="RSN Information">
+                                                30 14 01 00 00 0f ac 04 01 00 00 0f ac 04 01 00 00 0f ac 01 28 00
+                                            </span>
+                                            <div id="annotatebtn" class="explanation">
+                                                <h6>RSN Information</h6>
+
+                                                <ul>
+                                                    <li><span class="bluecolor fw-bold">30:-</span> Tag Number: RSN Information (48)</li>
+                                                    <li><span class="bluecolor fw-bold">14:-</span> Tag length: 20</li>
+                                                    <li><span class="bluecolor fw-bold">01 00:-</span> RSN Version: 1</li>
+
+                                                    <li>
+                                                        <span class="bluecolor fw-bold">00 0f ac 04:-</span> Group Cipher Suite: 00:0f:ac (Ieee 802.11) AES (CCM)
+                                                        <ul class="mt-0">
+                                                            <li>Group Cipher Suite OUI: 00:0f:ac (Ieee 802.11)</li>
+                                                            <li>Group Cipher Suite type: AES (CCM) (4)</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <span class="bluecolor fw-bold">00 0f ac 04:-</span>Pairwise Cipher Suite List 00:0f:ac (Ieee 802.11) AES (CCM)
+                                                        <ul class="mt-0">
+                                                            <li><span class="bluecolor fw-bold">00 0f ac:-</span> Pairwise Cipher Suite OUI: 00:0f:ac (Ieee 802.11)</li>
+                                                            <li><span class="bluecolor fw-bold">04:-</span> Pairwise Cipher Suite type: AES (CCM) (4)</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Auth Key Management (AKM) Suite Count: 1</li>
+                                                    <li>
+                                                        <span class="bluecolor fw-bold">00 0f ac 01:-</span>Auth Key Management (AKM) Suite: 00:0f:ac (Ieee 802.11) WPA
+                                                        <ul class="mt-0">
+                                                            <li><span class="bluecolor fw-bold">00 0f ac:-</span>Auth Key Management (AKM) OUI: 00:0f:ac (Ieee 802.11)</li>
+                                                            <li><span class="bluecolor fw-bold">01:-</span>Auth Key Management (AKM) type: WPA (1)</li>
+                                                        </ul>
+                                                    </li>
+													<li><span class="bluecolor fw-bold">28 00:-</span> RSN Capabilities: 0x0028 
+													
+														 <ul>
+                                                            <li><tt>.... ...0</tt>= Non ERP Present: Not set</li>
+                                                            <li><tt>.... ..0.</tt>= Use Protection: Not set</li>
+                                                            <li><tt>.... .1..</tt>= Barker Preamble Mode: Set</li>
+                                                            <li><tt>0000 0...</tt>= Reserved: 0x00</li>
+                                                        </ul>
 													</li>
                                                 </ul>
                                             </div>
                                         </span>
-										
                                     </span>
                                 </div>
                             </div>
