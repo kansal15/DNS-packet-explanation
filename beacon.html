@@ -44,8 +44,7 @@
                     <div id="collapse-1" class="collapse openaccording" aria-labelledby="heading-1" data-parent="#accordion">
                         <div class="card-body accordion-body">
                             <div class="">
-                                In 802.11 wireless networks, there are 4 types of frames, namely, Management, Control, Data, and Extension frames. In this post, we will discuss about 802.11 Beacon frames, which is of management type. The
-                                session begins with the client saying "Hello". The client provides the following:
+                                In 802.11 wireless networks, there are 4 types of frames, namely, Management, Control, Data, and Extension frames. In this post, we will discuss about 802.11 Beacon frames, which is of management type.
                                 <img src="include/img/802.11_frame.png" alt="Beacon Frame" style="max-width: 100%; padding-top: 15px;" />
                             </div>
 
@@ -98,23 +97,19 @@
                                                     <li><tt>0... ....</tt>= +HTC/Order flag: Not strictly ordered</li>
                                                 </ul>
                                                 <ul class="tagExplanation">
-                                                    <li><b>DS Status:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
+                                                    <li><b>DS Status:-</b> It is 1 bit field. To and from DS is 0 means communication is happening in AD-HOC mode. Both To DS and From DS are 1 bit each.</li>
                                                     <li>
-                                                        <b>More Fragments:-</b> It is also 2 bit field. Type decides the type of Packet. Packet can be management, Control,Data or Extended. 00 defines management frame, 01 defines control
-                                                        frame, 10 defines data frame and 11 defines extended frame
+                                                        <b>More Fragments:-</b> It is 1 bit field. 
                                                     </li>
                                                     <li>
-                                                        <b>Retry:-</b> It is also 2 bit field. This field defines the subtype of management, control, data and extended frame like Association request, Association response, probe request,
-                                                        probe response, beacon, authentication, deauthentication are subtype of management type. RTS/CTS, ACK, Block-ACK,PS-Poll etc are subtype of control frames. QOS, CF-ACK, CF-Poll, QOS
-                                                        Null etc are subtype of Data type frame. Extended type is new to 802.11. DMG beacon and S1G beacon are subtype of Extension frame.
+                                                        <b>Retry:-</b> It is 1 bit field. This bit is ON if due to interference frames got corrupted and had to be retransmitted. Frame is not being transmitted means there was no collision.
                                                     </li>
-                                                    <li><b>PWR MGT:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
+                                                    <li><b>PWR MGT:-</b> It is 1 bit field. It was introduced to save the power of end devices. When this bit is ON, it means end device is sleeping and access point buffer any data related to it.</li>
                                                     <li>
-                                                        <b>More Data:-</b> It is also 2 bit field. Type decides the type of Packet. Packet can be management, Control,Data or Extended. 00 defines management frame, 01 defines control frame,
-                                                        10 defines data frame and 11 defines extended frame
+                                                        <b>More Data:-</b> It is also 1 bit field. More data bit is used only in management and data frames. This bit is set to 0 in control frames.
                                                     </li>
-                                                    <li><b>Protected Flag:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
-                                                    <li><b>+HTC/Order flag:-</b> It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
+                                                    <li><b>Protected Flag:-</b> It is 1 bit field. Protected frame bit is only for control frames. Control frames may not be encrypted, so this frame bit is always 0.</li>
+                                                    <li><b>+HTC/Order flag:-</b> It is 1 bit field. control frames can't be out of order. Therefore, this bit is set to 0.</li>
                                                 </ul>
                                             </div>
                                         </div>
