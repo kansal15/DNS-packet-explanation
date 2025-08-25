@@ -121,8 +121,9 @@
                                         </span>
                                         <div id="annotatebtn" class="explanation">
                                             .000 0000 0000 0000 = Duration: 0 microseconds
-
-                                         
+                                        <ul class="tagExplanation">
+                                                    <li><b>Duration:-</b> It is 1 bit field. To and from DS is 0 means communication is happening in AD-HOC mode. Both To DS and From DS are 1 bit each.</li>
+                                         </ul>
                                         </div>
                                     </span>
 
@@ -132,7 +133,9 @@
                                         </span>
                                         <div id="annotatebtn" class="explanation">
                                             Receiver address: Broadcast (ff:ff:ff:ff:ff:ff)
-
+                                        <ul class="tagExplanation">
+                                                    <li> MAC of the next immediate recipient of the frame.</li>
+                                         </ul>
                                         </div>
                                     </span>
 
@@ -142,7 +145,9 @@
                                         </span>
                                         <div id="annotatebtn" class="explanation">
                                             Destination address: Broadcast (ff:ff:ff:ff:ff:ff)
-
+											<ul class="tagExplanation">
+                                                  <li> MAC of the final destination of the frame.</li>
+												  </ul>
                                         </div>
                                     </span>
 
@@ -152,7 +157,9 @@
                                         </span>
                                         <div id="annotatebtn" class="explanation">
                                             Transmitter address: Cisco_1c:24:22 (88:9c:ad:1c:24:22)
-
+<ul class="tagExplanation">
+                                                  <li> MAC of the system that is directly transmitting the frame.</li>
+												  </ul>
                                         </div>
                                     </span>
 
@@ -162,11 +169,36 @@
                                         </span>
                                         <div id="annotatebtn" class="explanation">
                                             Source address: Cisco_1c:24:22 (88:9c:ad:1c:24:22)
-
+<ul class="tagExplanation">
+                                                  <li> MAC of the original sender of the frame.</li>
+												  </ul>
                                             
                                         </div>
                                     </span>
-
+									
+									 <span class="string">
+                                        <span class="bytes" data-bs-toggle="tooltip" title="BSS Id">
+                                            88:9c:ad:1c:24:22
+                                        </span>
+                                        <div id="annotatebtn" class="explanation">
+                                             BSS Id: Cisco_1c:24:22 (88:9c:ad:1c:24:22)
+                                            <ul class="tagExplanation">
+                                                  <li> MAC of wireless NIC of access point.</li>
+												  </ul>
+                                            
+                                        </div>
+                                    </span>
+                                        <span class="string">
+                                        <span class="bytes" data-bs-toggle="tooltip" title="Fragment Number">
+                                            a0 fa
+                                        </span>
+                                        <div id="annotatebtn" class="explanation">
+                                           .... .... .... 0000 = Fragment number: 0
+                                                <ul class="tagExplanation">
+                                                  <li> It is 1 bit field. To and from DS is 0 means communication is happening in AD-HOC mode. Both To DS and From DS are 1 bit each.</li>
+												  </ul>
+                                        </div>
+                                    </span>
                                
                                     <span class="string">
                                         <span class="bytes" data-bs-toggle="tooltip" title="Sequence Number">
@@ -174,7 +206,9 @@
                                         </span>
                                         <div id="annotatebtn" class="explanation">
                                             1111 1010 1010 .... = Sequence number: 4010
-
+<ul class="tagExplanation">
+                                                  <li> It is 1 bit field. To and from DS is 0 means communication is happening in AD-HOC mode. Both To DS and From DS are 1 bit each.</li>
+												  </ul>
                                         </div>
                                     </span>
 
@@ -187,73 +221,13 @@
 
 
 											<ul class="tagExplanation">
-                                                <li><b>Version:-</b>It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
+                                                <li><b>FCS:-</b>This Field is used for error detection. It is Cyclic redundancy check value calculated by sender and verified by receiver and if this field isn't same then that packet is discarded.</li>
                                                 
                                              
                                             </ul>
 
                                          
-                                        </div>
-										
-                                    </span>
-
-                             
-
-
-                                    <span class="string">
-                                        <span class="bytes" data-bs-toggle="tooltip" title="Destination address">
-                                            ff ff ff ff ff ff
-                                        </span>
-                                        <div id="annotatebtn" class="explanation">
-                                            <h5>HH</h5>
-                                            <ul>
-                                                <li><tt>0... .... .... ....</tt>= QR</li>
-                                                
-                                            </ul>
-
-                                            <ul class="tagExplanation">
-                                                <li><b>Version:-</b>It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
-
-                                            </ul>
-                                        </div>
-                                    </span>
-
-                                    <span class="string">
-                                        <span class="bytes" data-bs-toggle="tooltip" title="Duration/ID">
-                                            88 9c ad 1c 24 22
-                                        </span>
-                                        <div id="annotatebtn" class="explanation">
-                                            <h5>HH</h5>
-                                            <ul>
-                                                <li><tt>0... .... .... ....</tt>= QR</li>
-                                               
-                                             
-                                            </ul>
-
-                                            <ul class="tagExplanation">
-                                                <li><b>Version:-</b>It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
-                                               
-                                             
-                                            </ul>
-                                        </div>
-                                    </span>
-
-                                    <span class="string">
-                                        <span class="bytes" data-bs-toggle="tooltip" title="Duration/ID">
-                                            a0 fa
-                                        </span>
-                                        <div id="annotatebtn" class="explanation">
-                                            <h5>HH</h5>
-                                            <ul>
-                                                <li><tt>0... .... .... ....</tt>= QR</li>
-                                             
-                                            </ul>
-
-                                            <ul class="tagExplanation">
-                                                <li><b>Version:-</b>It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
-                                           
-                                            </ul>
-                                        </div>
+                                        </div
                                     </span>
                                 </span>
                             </div>
@@ -286,11 +260,14 @@
                                             </span>
                                             <div id="annotatebtn" class="explanation">
                                                 <h6>TimeStamp</h6>
-                                                .000 0000 0000 0000 = Duration: 0 microseconds
+                                                Timestamp: 2345823028455
 
-                                                <p>
-                                                    lfgodko
-                                                </p>
+                                             <ul class="tagExplanation">
+                                                <li><b>Timestamp:-</b>hhhhhh</li>
+                                                                                          
+                                            </ul>
+											
+											
                                             </div>
                                         </span>
 
@@ -300,11 +277,13 @@
                                             </span>
                                             <div id="annotatebtn" class="explanation">
                                                 <h6>Beacon Interval</h6>
-                                                .000 0000 0000 0000 = Duration: 0 microseconds
-
-                                                <p>
-                                                    lfgodko
-                                                </p>
+                                                Beacon Interval: 0.204800 [Seconds]
+<ul class="tagExplanation">
+                                                <li><b>Beacon Interval:-</b>It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
+                                                
+                                             
+                                            </ul>
+                                             
                                             </div>
                                         </span>
 
@@ -314,11 +293,9 @@
                                             </span>
                                             <div id="annotatebtn" class="explanation">
                                                 <h6>Capabilities Information: 0x1411</h6>
-                                                .000 0000 0000 0000 = Duration: 0 microseconds
+                                                
 
-                                                <p>
-                                                    lfgodko
-                                                </p>
+                                              
 
                                                 <ul>
                                                     <li><tt>.... .... .... ...1</tt>= ESS capabilities: Transmitter is an AP</li>
@@ -338,34 +315,18 @@
                                                     <li><tt>.0.. .... .... ....</tt>= Reserved: 0</li>
                                                     <li><tt>0... .... .... ....</tt>= Reserved: 0</li>
                                                 </ul>
+												<ul class="tagExplanation">
+                                                <li><b>Version:-</b>It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
+                                                <li><b>Version:-</b>It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
+                                                <li><b>Version:-</b>It is 2 bit field. It is set to 0 for WLAN (PV0) and set to 1 for 802.11ah (PV1)</li>
+                                            </ul>
+											
                                             </div>
                                         </span>
 
-                                        <span class="string">
-                                            <span class="bytes" data-bs-toggle="tooltip" title="Capabilities Information: 0x1411">
-                                                11 14
-                                            </span>
-                                            <div id="annotatebtn" class="explanation">
-                                                .000 0000 0000 0000 = Duration: 0 microseconds
 
-                                                <p>
-                                                    lfgodko
-                                                </p>
-                                            </div>
-                                        </span>
 
-                                        <span class="string">
-                                            <span class="bytes" data-bs-toggle="tooltip" title="Duration">
-                                                00 05 4c 45 48 41 52
-                                            </span>
-                                            <div id="annotatebtn" class="explanation">
-                                                .000 0000 0000 0000 = Duration: 0 microseconds
-
-                                                <p>
-                                                    lfgodko
-                                                </p>
-                                            </div>
-                                        </span>
+                                        
                                     </span>
                                 </div>
                             </div>
@@ -472,6 +433,10 @@
                                                         </ul>
                                                     </li>
                                                 </ul>
+												 <ul class="tagExplanation">
+                                                <li><b>Version:-</b>hhhhhh</li>
+                                                                                          
+                                            </ul>
                                             </div>
                                         </span>
 
